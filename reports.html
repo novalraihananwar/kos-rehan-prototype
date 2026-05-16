@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Keuangan — SmartKos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="app-layout">
+<aside class="app-sidebar" id="app-sidebar">
+  <div class="sidebar-brand"><div class="sidebar-brand-logo"><div class="sidebar-logo-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2.5"/><polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2.5"/></svg></div><div><div class="sidebar-brand-name">SmartKos</div><div class="sidebar-prop-name">Kos Harmoni Residence</div></div></div></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section"><div class="sidebar-section-label">Menu Utama</div>
+      <a href="dashboard.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>Dashboard</a>
+      <a href="rooms.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/></svg>Kamar</a>
+      <a href="tenants.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>Penghuni</a>
+      <a href="payments.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/></svg>Pembayaran</a>
+      <a href="complaints.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="currentColor" stroke-width="2"/></svg>Komplain</a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Keuangan</div>
+      <a href="reports.html" class="sidebar-link active"><svg class="icon" fill="none" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Laporan</a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Pengaturan</div>
+      <a href="wa-settings.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="2"/></svg>WhatsApp</a>
+      <a href="booking.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2"/></svg>Booking Online</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer"><div class="sidebar-user"><div class="sidebar-avatar">HK</div><div class="sidebar-user-info"><div class="sidebar-user-name">Hendra Kusuma</div><div class="sidebar-user-role">Owner</div></div></div></div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="app-main">
+<header class="app-topbar">
+  <button id="sidebar-toggle" class="btn btn-ghost btn-icon md:hidden"><svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <div class="flex-1"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#0B1D2E">Laporan Keuangan</div><div style="font-size:12px;color:#94A3B8">Analitik dan export data</div></div>
+  <div class="flex items-center gap-2">
+    <button class="btn btn-outline btn-sm" onclick="showToast('Export Excel berhasil!','success')">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/></svg>
+      Excel
+    </button>
+    <button class="btn btn-primary btn-sm" onclick="showToast('Export PDF berhasil!','success')">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/></svg>
+      PDF
+    </button>
+    <div style="width:34px;height:34px;border-radius:50%;background:#0B1D2E;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700">HK</div>
+  </div>
+</header>
+
+<div class="app-content">
+  <div class="page-header">
+    <div><div class="page-title">Laporan Keuangan 2025</div><div class="page-sub">Kos Harmoni Residence · Diperbarui: 27 Oktober 2025</div></div>
+    <select class="form-select" style="width:140px;font-size:13px">
+      <option>2025</option><option>2024</option>
+    </select>
+  </div>
+
+  <!-- Annual Summary -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4">
+      <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:4px">Total Pemasukan YTD</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#2563EB">Rp 307.6Jt</div>
+      <div style="font-size:12px;color:#059669;margin-top:2px">↑ 8.4% vs 2024</div>
+    </div>
+    <div class="card p-4">
+      <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:4px">Rata-Rata/Bulan</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#0B1D2E">Rp 30.8Jt</div>
+      <div style="font-size:12px;color:#94A3B8;margin-top:2px">10 bulan berjalan</div>
+    </div>
+    <div class="card p-4">
+      <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:4px">Occupancy Rate</div>
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#059669">70%</div>
+      <div style="font-size:12px;color:#94A3B8;margin-top:2px">Rata-rata 2025</div>
+    </div>
+    <div class="card p-4">
+      <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:4px">Proyeksi Des 2025</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#7C3AED">Rp 373Jt</div>
+      <div style="font-size:12px;color:#94A3B8;margin-top:2px">Jika trend berlanjut</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+    <div class="card p-5">
+      <div style="font-size:15px;font-weight:700;color:#0B1D2E;margin-bottom:4px">Pemasukan Bulanan</div>
+      <div style="font-size:12px;color:#94A3B8;margin-bottom:16px">Actual vs Target 2025</div>
+      <canvas id="chart-monthly" height="250"></canvas>
+    </div>
+    <div class="card p-5">
+      <div style="font-size:15px;font-weight:700;color:#0B1D2E;margin-bottom:4px">Pemasukan per Tipe Kamar</div>
+      <div style="font-size:12px;color:#94A3B8;margin-bottom:16px">Distribusi Oktober 2025</div>
+      <canvas id="chart-type" height="250"></canvas>
+    </div>
+  </div>
+
+  <!-- Monthly Table -->
+  <div class="card mb-5">
+    <div class="p-5 border-b" style="border-color:#F1F5F9">
+      <div style="font-size:15px;font-weight:700;color:#0B1D2E">Rekap Bulanan 2025</div>
+    </div>
+    <div class="overflow-x-auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:#F8FAFC">
+          <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Bulan</th>
+          <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Pemasukan</th>
+          <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Target</th>
+          <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Selisih</th>
+          <th style="padding:10px 16px;text-align:center;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Status</th>
+          <th style="padding:10px 16px;text-align:center;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Kamar Terisi</th>
+        </tr></thead>
+        <tbody id="monthly-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Revenue breakdown by room type -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="card p-5">
+      <div style="font-size:15px;font-weight:700;color:#0B1D2E;margin-bottom:14px">Pemasukan per Tipe Kamar (Okt)</div>
+      <div id="type-breakdown" style="display:flex;flex-direction:column;gap:12px"></div>
+    </div>
+    <div class="card p-5">
+      <div style="font-size:15px;font-weight:700;color:#0B1D2E;margin-bottom:14px">Top 5 Kamar Terlaris 2025</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:#F8FAFC;border-radius:8px"><div><div style="font-weight:600;font-size:13px;color:#0B1D2E">K-117 — Deluxe</div><div style="font-size:11px;color:#94A3B8">Eko Prasetyo · 10 bulan</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#059669">Rp 12Jt</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:#F8FAFC;border-radius:8px"><div><div style="font-weight:600;font-size:13px;color:#0B1D2E">K-116 — Deluxe</div><div style="font-size:11px;color:#94A3B8">Putri Melinda · 10 bulan</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#059669">Rp 12Jt</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:#F8FAFC;border-radius:8px"><div><div style="font-weight:600;font-size:13px;color:#0B1D2E">K-101 — Standard</div><div style="font-size:11px;color:#94A3B8">Budi Santoso · 10 bulan</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#059669">Rp 7.5Jt</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:#F8FAFC;border-radius:8px"><div><div style="font-weight:600;font-size:13px;color:#0B1D2E">K-119 — Deluxe</div><div style="font-size:11px;color:#94A3B8">Gunawan Santoso · 8 bulan</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#059669">Rp 9.6Jt</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:#F8FAFC;border-radius:8px"><div><div style="font-weight:600;font-size:13px;color:#0B1D2E">K-102 — Standard</div><div style="font-size:11px;color:#94A3B8">Dewi Rahayu · 9 bulan</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#059669">Rp 6.75Jt</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+// Monthly income chart
+const months = SK.monthlyIncome.map(m => m.month);
+const income = SK.monthlyIncome.map(m => m.income);
+const target = SK.monthlyIncome.map(m => m.target);
+
+new Chart(document.getElementById('chart-monthly'), {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [
+      { label: 'Pemasukan Aktual', data: income, backgroundColor: income.map((v, i) => v > 0 ? (v >= target[i] ? '#059669' : '#2563EB') : 'rgba(0,0,0,.05)'), borderRadius: 6, borderSkipped: false },
+      { label: 'Target', data: target, type: 'line', borderColor: '#F59E0B', backgroundColor: 'transparent', borderWidth: 2, borderDash: [5, 5], pointRadius: 3, pointBackgroundColor: '#F59E0B', tension: .4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top', labels: { font: { size: 12, family: 'Plus Jakarta Sans' }, usePointStyle: true, padding: 16 } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11, family: 'Plus Jakarta Sans' }, color: '#94A3B8' } },
+      y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 11, family: 'Plus Jakarta Sans' }, color: '#94A3B8', callback: v => v > 0 ? 'Rp ' + (v / 1000000).toFixed(1) + 'Jt' : '0' } }
+    }
+  }
+});
+
+// By type chart
+new Chart(document.getElementById('chart-type'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Standard (K101-K115)', 'Deluxe (K116-K128)', 'Premium (K129-K135)', 'Suite (K136-K140)'],
+    datasets: [{ data: [11250000, 15600000, 0, 0], backgroundColor: ['#2563EB', '#059669', '#D97706', '#7C3AED'], borderWidth: 0, hoverOffset: 6 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '65%',
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: 'Plus Jakarta Sans' }, usePointStyle: true, padding: 12 } },
+      tooltip: { callbacks: { label: c => ' ' + c.label.split(' ')[0] + ': ' + SK.formatRupiah(c.raw) } }
+    }
+  }
+});
+
+// Monthly table
+const tbody = document.getElementById('monthly-table');
+SK.monthlyIncome.forEach((m, i) => {
+  const diff = m.income - m.target;
+  const pct = m.target > 0 && m.income > 0 ? ((m.income / m.target) * 100).toFixed(0) : 0;
+  const occupancy = m.income > 0 ? Math.floor(21 + Math.random() * 9) : '—';
+  tbody.innerHTML += `<tr style="border-bottom:1px solid #F1F5F9${i === 9 ? ';background:#EFF6FF' : ''}">
+    <td style="padding:10px 16px;font-weight:${i===9?'700':'500'};color:#0B1D2E">${m.month} 2025 ${i===9?'<span style="font-size:10px;background:#DBEAFE;color:#1E40AF;padding:2px 6px;border-radius:4px;margin-left:4px">Bulan Ini</span>':''}</td>
+    <td style="padding:10px 16px;text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:${m.income>0?'#0B1D2E':'#94A3B8'}">${m.income > 0 ? SK.formatRupiah(m.income) : '—'}</td>
+    <td style="padding:10px 16px;text-align:right;font-family:'JetBrains Mono',monospace;color:#64748B">${SK.formatRupiah(m.target)}</td>
+    <td style="padding:10px 16px;text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:${diff>=0?'#059669':'#DC2626'}">${m.income>0?(diff>=0?'+':'')+SK.formatRupiah(diff):'—'}</td>
+    <td style="padding:10px 16px;text-align:center">${m.income>0?`<div style="background:#F1F5F9;border-radius:99px;overflow:hidden;height:6px;width:80px;margin:0 auto"><div style="height:100%;background:${pct>=100?'#059669':'#2563EB'};width:${Math.min(pct,100)}%"></div></div><div style="font-size:11px;color:${pct>=100?'#059669':'#2563EB'};margin-top:2px;font-weight:600">${pct}%</div>`:'<span style="color:#94A3B8;font-size:12px">Belum</span>'}</td>
+    <td style="padding:10px 16px;text-align:center;font-family:'JetBrains Mono',monospace;color:#475569">${m.income>0?occupancy+'/40':'—'}</td>
+  </tr>`;
+});
+
+// Type breakdown
+const breakdown = document.getElementById('type-breakdown');
+const typeData = [
+  { type: 'Standard', rooms: 15, terisi: 15, price: 750000, color: '#2563EB' },
+  { type: 'Deluxe', rooms: 13, terisi: 13, price: 1200000, color: '#059669' },
+  { type: 'Premium', rooms: 7, terisi: 0, price: 1800000, color: '#D97706' },
+  { type: 'Suite', rooms: 5, terisi: 0, price: 2500000, color: '#7C3AED' },
+];
+const total = typeData.reduce((s, t) => s + t.terisi * t.price, 0);
+typeData.forEach(t => {
+  const amount = t.terisi * t.price;
+  const pct = total > 0 ? ((amount / total) * 100).toFixed(1) : 0;
+  breakdown.innerHTML += `<div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+      <span style="font-size:13px;font-weight:600;color:#0B1D2E">${t.type} <span style="color:#94A3B8;font-weight:400">(${t.terisi}/${t.rooms})</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:${t.color}">${SK.formatRupiah(amount)}</span>
+    </div>
+    <div style="background:#F1F5F9;border-radius:99px;overflow:hidden;height:8px">
+      <div style="height:100%;background:${t.color};width:${pct}%;border-radius:99px;transition:width 1s ease"></div>
+    </div>
+    <div style="font-size:11px;color:#94A3B8;margin-top:3px">${pct}% dari total pemasukan</div>
+  </div>`;
+});
+</script>
+</body>
+</html>

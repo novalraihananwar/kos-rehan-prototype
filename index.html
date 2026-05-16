@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartKos — Sistem Manajemen Kos Modern & Otomatis</title>
+<meta name="description" content="Platform SaaS untuk kelola kos secara digital: kamar, penghuni, pembayaran, reminder WhatsApp otomatis, dan laporan keuangan dalam satu dashboard modern.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ── Design tokens ─────────────────────────────────────── */
+:root{
+  --navy:#0B1D2E;--navy-d:#050F19;--navy-l:#1A3552;
+  --blue:#2563EB;--blue-d:#1D4ED8;
+  --emerald:#059669;
+  --font-d:'Syne',sans-serif;
+  --font-b:'Plus Jakarta Sans',sans-serif;
+  --font-m:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+body{font-family:var(--font-b);color:#1E293B;background:#fff}
+.fd{font-family:var(--font-d)}
+.fm{font-family:var(--font-m)}
+
+/* Gradient text — brand accent only */
+.tg{background:linear-gradient(135deg,#60A5FA 0%,#34D399 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── Layout: navbar ──────────────────────────────────────*/
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(11,29,46,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.07)}
+
+/* ── Layout: hero ────────────────────────────────────────*/
+.hero{background:linear-gradient(135deg,#050F19 0%,#0B1D2E 45%,#112840 100%);
+  position:relative;overflow:hidden}
+.hero-grid{
+  background-image:
+    linear-gradient(rgba(37,99,235,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,.06) 1px,transparent 1px);
+  background-size:56px 56px}
+.orb1{position:absolute;width:650px;height:650px;
+  background:radial-gradient(circle,rgba(37,99,235,.18) 0%,transparent 70%);
+  top:-120px;right:-80px;border-radius:50%;pointer-events:none}
+.orb2{position:absolute;width:450px;height:450px;
+  background:radial-gradient(circle,rgba(5,150,105,.13) 0%,transparent 70%);
+  bottom:60px;left:-60px;border-radius:50%;pointer-events:none}
+
+/* ── Buttons — unified system ────────────────────────────*/
+.btn-p{
+  background:var(--blue);color:#fff;
+  padding:12px 24px;border-radius:12px;
+  font-weight:700;font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;font-family:var(--font-b);
+  border:none;cursor:pointer;text-decoration:none}
+.btn-p:hover{background:var(--blue-d);transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(37,99,235,.4)}
+
+.btn-s{
+  background:rgba(255,255,255,.1);color:#fff;
+  padding:12px 24px;border-radius:12px;
+  font-weight:600;font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;font-family:var(--font-b);
+  border:1px solid rgba(255,255,255,.2);
+  cursor:pointer;text-decoration:none}
+.btn-s:hover{background:rgba(255,255,255,.18)}
+
+.btn-outline-dark{
+  display:block;width:100%;text-align:center;
+  padding:12px;border-radius:12px;
+  font-weight:600;font-size:14px;
+  border:2px solid var(--navy);color:var(--navy);
+  transition:all .2s;font-family:var(--font-b);text-decoration:none}
+.btn-outline-dark:hover{background:var(--navy);color:#fff}
+
+/* ── Cards — unified system ──────────────────────────────*/
+.card-f{
+  background:#fff;border:1px solid #E2E8F0;
+  border-radius:16px;padding:28px;transition:all .3s}
+.card-f:hover{transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:var(--blue)}
+
+.card-p{
+  background:#fff;border:1px solid #E2E8F0;
+  border-radius:20px;padding:32px;transition:all .3s}
+.card-p:hover{transform:translateY(-3px);
+  box-shadow:0 16px 36px rgba(0,0,0,.1)}
+.card-p.featured{background:var(--navy);border:none;color:#fff}
+.card-p.featured:hover{transform:translateY(-3px) scale(1.04);
+  box-shadow:0 24px 48px rgba(11,29,46,.4)}
+
+.card-t{
+  background:#fff;border:1px solid #E2E8F0;
+  border-radius:16px;padding:28px}
+
+.stat-c{
+  background:rgba(255,255,255,.08);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:28px;text-align:center;color:#fff}
+
+/* ── Badges — unified system ─────────────────────────────*/
+.bd{display:inline-flex;align-items:center;gap:6px;
+  padding:4px 11px;border-radius:9999px;font-size:12px;font-weight:600}
+.bd-g{background:#D1FAE5;color:#065F46}
+.bd-b{background:#DBEAFE;color:#1E40AF}
+.bd-a{background:#FEF3C7;color:#92400E}
+.bd-r{background:#FEE2E2;color:#991B1B}
+.bd-s{background:#F1F5F9;color:#475569}
+
+/* ── Section chip ────────────────────────────────────────*/
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#EFF6FF;color:var(--blue);
+  padding:5px 13px;border-radius:9999px;
+  font-size:12px;font-weight:700}
+
+/* ── FAQ ─────────────────────────────────────────────────*/
+.faq-item{border-bottom:1px solid #E2E8F0}
+.faq-btn{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  padding:20px 0;font-weight:600;font-size:15px;cursor:pointer;
+  background:none;border:none;text-align:left;
+  font-family:var(--font-b);color:#1E293B}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-body.open{max-height:200px}
+
+/* ── Animations ──────────────────────────────────────────*/
+.reveal{opacity:0;transform:translateY(16px);
+  transition:opacity .55s ease,transform .55s ease}
+.reveal.vis{opacity:1;transform:none}
+
+@keyframes fiu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.afiu{animation:fiu .6s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}
+.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+
+/* ── Scrollbar ───────────────────────────────────────────*/
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAVBAR ══════════════════════════════ -->
+<nav class="nav">
+  <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--blue)">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2.5"/>
+          <polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <span class="fd font-bold text-xl text-white">SmartKos</span>
+    </a>
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#fitur" class="text-sm text-gray-300 hover:text-white transition-colors">Fitur</a>
+      <a href="#cara-kerja" class="text-sm text-gray-300 hover:text-white transition-colors">Cara Kerja</a>
+      <a href="#harga" class="text-sm text-gray-300 hover:text-white transition-colors">Harga</a>
+      <a href="#faq" class="text-sm text-gray-300 hover:text-white transition-colors">FAQ</a>
+      <a href="booking.html" class="text-sm text-gray-300 hover:text-white transition-colors">Booking</a>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="login.html" class="text-sm text-gray-300 hover:text-white font-medium transition-colors">Masuk</a>
+      <a href="login.html" class="btn-p" style="padding:9px 18px;font-size:13px">Coba Gratis →</a>
+    </div>
+    <button id="mob-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+      <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div id="mob-menu" class="hidden md:hidden px-5 pb-4 flex flex-col gap-3" style="background:#0B1D2E">
+    <a href="#fitur" class="text-gray-300 text-sm py-1">Fitur</a>
+    <a href="#cara-kerja" class="text-gray-300 text-sm py-1">Cara Kerja</a>
+    <a href="#harga" class="text-gray-300 text-sm py-1">Harga</a>
+    <a href="#faq" class="text-gray-300 text-sm py-1">FAQ</a>
+    <a href="booking.html" class="text-gray-300 text-sm py-1">Booking Online</a>
+    <a href="login.html" class="btn-p text-center text-sm mt-1" style="justify-content:center">Coba Gratis →</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ════════════════════════════════ -->
+<section class="hero hero-grid min-h-screen flex items-center">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="max-w-7xl mx-auto px-5 pt-28 pb-20 w-full relative z-10">
+    <div class="text-center max-w-4xl mx-auto">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8 afiu"
+        style="background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);color:#93C5FD">
+        <span class="w-2 h-2 rounded-full bg-emerald-400" style="animation:pulse 1.5s infinite"></span>
+        Platform Manajemen Kos #1 Indonesia
+      </div>
+
+      <!-- Heading -->
+      <h1 class="fd font-extrabold text-5xl md:text-6xl lg:text-7xl text-white leading-[1.08] mb-5 afiu d1">
+        Kelola Kos Kamu
+        <span class="tg block mt-1">Lebih Cerdas & Otomatis</span>
+      </h1>
+
+      <!-- Sub -->
+      <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed afiu d2">
+        Satu platform untuk kamar, penghuni, pembayaran QRIS, reminder WhatsApp otomatis,
+        dan laporan keuangan. Dari 1 kamar sampai 100 cabang.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap justify-center gap-4 mb-16 afiu d3">
+        <a href="login.html" class="btn-p text-base px-8 py-3">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Mulai Sekarang — Gratis
+        </a>
+        <a href="dashboard.html" class="btn-s text-base px-8 py-3">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <polygon points="10 8 16 12 10 16 10 8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          Lihat Demo Dashboard
+        </a>
+      </div>
+
+      <!-- Trust row -->
+      <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-500 mb-16 afiu d4">
+        <span class="flex items-center gap-2">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#10B981" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>500+ Pemilik Aktif
+        </span>
+        <span class="flex items-center gap-2">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#10B981" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>10.000+ Kamar Dikelola
+        </span>
+        <span class="flex items-center gap-2">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#10B981" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>Trial 30 Hari Gratis
+        </span>
+        <span class="flex items-center gap-2">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#10B981" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>Tanpa Kartu Kredit
+        </span>
+      </div>
+
+      <!-- Dashboard preview mockup -->
+      <div class="rounded-2xl overflow-hidden afiu d4"
+        style="border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 80px rgba(0,0,0,.6)">
+        <!-- Browser chrome -->
+        <div class="h-10 flex items-center gap-2 px-4"
+          style="background:#1E293B;border-bottom:1px solid rgba(255,255,255,.07)">
+          <div class="w-3 h-3 rounded-full bg-red-400"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div class="w-3 h-3 rounded-full bg-green-400"></div>
+          <div class="flex-1 mx-3 rounded px-3 py-1 text-xs text-gray-400 text-left"
+            style="background:rgba(255,255,255,.08)">app.smartkos.id/dashboard</div>
+        </div>
+        <!-- App shell -->
+        <div class="flex" style="background:#0F172A;height:380px">
+          <!-- Sidebar mini -->
+          <div class="w-44 border-r p-4 hidden md:flex flex-col gap-1"
+            style="background:#0B1D2E;border-color:rgba(255,255,255,.06)">
+            <div class="flex items-center gap-2 mb-5">
+              <div class="w-6 h-6 rounded flex-shrink-0" style="background:var(--blue)"></div>
+              <span class="text-white text-sm font-semibold">SmartKos</span>
+            </div>
+            <div class="rounded-lg px-3 py-2 text-xs text-white font-semibold flex items-center gap-2"
+              style="background:var(--blue)">
+              <div class="w-3 h-3 rounded" style="background:rgba(255,255,255,.3)"></div>Dashboard
+            </div>
+            <div class="px-3 py-2 text-xs text-gray-400 flex items-center gap-2">
+              <div class="w-3 h-3 rounded" style="background:rgba(255,255,255,.15)"></div>Kamar (40)
+            </div>
+            <div class="px-3 py-2 text-xs text-gray-400 flex items-center gap-2">
+              <div class="w-3 h-3 rounded" style="background:rgba(255,255,255,.15)"></div>Penghuni
+            </div>
+            <div class="px-3 py-2 text-xs text-gray-400 flex items-center gap-2">
+              <div class="w-3 h-3 rounded" style="background:rgba(255,255,255,.15)"></div>Pembayaran
+            </div>
+            <div class="px-3 py-2 text-xs text-gray-400 flex items-center gap-2">
+              <div class="w-3 h-3 rounded" style="background:rgba(255,255,255,.15)"></div>Laporan
+            </div>
+            <div class="px-3 py-2 text-xs text-gray-400 flex items-center gap-2">
+              <div class="w-3 h-3 rounded" style="background:rgba(255,255,255,.15)"></div>WhatsApp
+            </div>
+          </div>
+          <!-- Main area -->
+          <div class="flex-1 p-5 overflow-hidden">
+            <div class="flex justify-between items-center mb-4">
+              <div class="text-white text-sm font-semibold fd">Dashboard Utama</div>
+              <div class="text-xs text-gray-400">Oktober 2025</div>
+            </div>
+            <!-- Stat cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div class="rounded-xl p-3" style="background:var(--blue)">
+                <div class="text-blue-200 text-xs mb-1">Pemasukan</div>
+                <div class="text-white font-bold fm">Rp 32,5Jt</div>
+              </div>
+              <div class="rounded-xl p-3" style="background:var(--emerald)">
+                <div class="text-emerald-200 text-xs mb-1">Terisi</div>
+                <div class="text-white font-bold fm">28 / 40</div>
+              </div>
+              <div class="rounded-xl p-3" style="background:rgba(255,255,255,.08)">
+                <div class="text-gray-400 text-xs mb-1">Kosong</div>
+                <div class="text-white font-bold fm">7</div>
+              </div>
+              <div class="rounded-xl p-3" style="background:rgba(239,68,68,.25)">
+                <div class="text-red-300 text-xs mb-1">Telat Bayar</div>
+                <div class="text-white font-bold fm">2</div>
+              </div>
+            </div>
+            <!-- Chart -->
+            <div class="rounded-xl p-4 mb-3" style="background:rgba(255,255,255,.05)">
+              <div class="text-gray-400 text-xs mb-3">Grafik Pemasukan 2025</div>
+              <div class="flex items-end gap-1.5" style="height:70px">
+                <div class="rounded-t flex-1" style="height:64%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:70%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:78%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:72%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:86%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:76%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:90%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:88%;background:rgba(37,99,235,.5)"></div>
+                <div class="rounded-t flex-1" style="height:96%;background:var(--blue)"></div>
+                <div class="rounded-t flex-1" style="height:93%;background:#10B981;animation:pulse 2s infinite"></div>
+                <div class="rounded-t flex-1" style="height:18%;background:rgba(255,255,255,.1)"></div>
+                <div class="rounded-t flex-1" style="height:18%;background:rgba(255,255,255,.1)"></div>
+              </div>
+            </div>
+            <!-- Activity feed -->
+            <div class="space-y-1.5">
+              <div class="rounded-lg px-3 py-2 flex items-center gap-3"
+                style="background:rgba(255,255,255,.05)">
+                <div class="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0"></div>
+                <div class="text-xs text-gray-300">Budi Santoso bayar Rp 750.000 via Transfer BCA</div>
+                <div class="ml-auto text-xs text-gray-500 flex-shrink-0">2 mnt</div>
+              </div>
+              <div class="rounded-lg px-3 py-2 flex items-center gap-3"
+                style="background:rgba(255,255,255,.05)">
+                <div class="w-2 h-2 rounded-full bg-blue-400 flex-shrink-0"></div>
+                <div class="text-xs text-gray-300">Booking baru K-130 dari Rizki Ahmad</div>
+                <div class="ml-auto text-xs text-gray-500 flex-shrink-0">15 mnt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FEATURES ═════════════════════════════ -->
+<section id="fitur" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-14 reveal">
+      <div class="chip mb-4">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>Fitur Unggulan
+      </div>
+      <h2 class="fd font-extrabold text-4xl md:text-5xl mb-4" style="color:var(--navy)">
+        Semua dalam <span class="tg">Satu Platform</span>
+      </h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+        Dari manajemen kamar hingga laporan keuangan — SmartKos menggantikan spreadsheet,
+        grup WhatsApp, dan catatan manual dengan satu dashboard yang bekerja otomatis.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- 1. Manajemen Kamar -->
+      <div class="card-f reveal">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+          style="background:#EFF6FF">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+              stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="9 22 9 12 15 12 15 22" stroke="#2563EB" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="fd font-bold text-xl mb-2" style="color:var(--navy)">Manajemen Kamar</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Pantau status 40+ kamar sekaligus dalam grid interaktif berwarna. Filter real-time,
+          dan status berubah otomatis saat pembayaran masuk.
+        </p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="bd bd-g">Terisi</span>
+          <span class="bd bd-s">Kosong</span>
+          <span class="bd bd-a">Booking</span>
+          <span class="bd bd-r">Telat</span>
+        </div>
+      </div>
+
+      <!-- 2. Pembayaran Digital -->
+      <div class="card-f reveal" style="animation-delay:.1s">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+          style="background:#ECFDF5">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <rect x="1" y="4" width="22" height="16" rx="2"
+              stroke="#059669" stroke-width="2"/>
+            <line x1="1" y1="10" x2="23" y2="10" stroke="#059669" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="fd font-bold text-xl mb-2" style="color:var(--navy)">Pembayaran Digital</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Invoice otomatis, transfer bank, QRIS, dan Midtrans terintegrasi. Lacak status
+          pembayaran setiap penghuni tanpa membuka spreadsheet.
+        </p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="bd bd-b">QRIS</span>
+          <span class="bd bd-g">Transfer</span>
+          <span class="bd bd-b">Midtrans</span>
+        </div>
+      </div>
+
+      <!-- 3. Reminder WhatsApp -->
+      <div class="card-f reveal" style="animation-delay:.2s">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+          style="background:#EFF6FF">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7
+              8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8
+              8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+              stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="fd font-bold text-xl mb-2" style="color:var(--navy)">Reminder WhatsApp Otomatis</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          H-7, H-3, Hari-H, dan keterlambatan terkirim otomatis dengan template profesional
+          yang bisa dikustomisasi sesuai gaya komunikasi kamu.
+        </p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="bd bd-g">H-7</span>
+          <span class="bd bd-a">H-3</span>
+          <span class="bd bd-r">Terlambat</span>
+        </div>
+      </div>
+
+      <!-- 4. Dashboard Keuangan -->
+      <div class="card-f reveal">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+          style="background:#ECFDF5">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"
+              stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="fd font-bold text-xl mb-2" style="color:var(--navy)">Dashboard Keuangan</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Grafik pemasukan bulanan, statistik okupansi, dan laporan lengkap siap ekspor.
+          Semua angka penting ada di satu layar.
+        </p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="bd bd-b">PDF</span>
+          <span class="bd bd-g">Excel</span>
+          <span class="bd bd-s">Grafik</span>
+        </div>
+      </div>
+
+      <!-- 5. Data Penghuni -->
+      <div class="card-f reveal" style="animation-delay:.1s">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+          style="background:#EFF6FF">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"
+              stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="2"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
+              stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="fd font-bold text-xl mb-2" style="color:var(--navy)">Data Penghuni Lengkap</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          KTP, foto, kontrak digital, riwayat pembayaran, dan riwayat komplain tersimpan
+          rapi dalam satu profil penghuni yang mudah dicari.
+        </p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="bd bd-b">Kontrak Digital</span>
+          <span class="bd bd-g">Scan KTP</span>
+        </div>
+      </div>
+
+      <!-- 6. Multi Cabang -->
+      <div class="card-f reveal" style="animation-delay:.2s">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+          style="background:#ECFDF5">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="5" r="2" stroke="#059669" stroke-width="2"/>
+            <circle cx="5" cy="19" r="2" stroke="#059669" stroke-width="2"/>
+            <circle cx="19" cy="19" r="2" stroke="#059669" stroke-width="2"/>
+            <path d="M12 7v4M12 11l-7 6M12 11l7 6"
+              stroke="#059669" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="fd font-bold text-xl mb-2" style="color:var(--navy)">Multi Cabang & Multi-Role</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Owner, Admin, Staff, dan Penghuni punya akses yang berbeda. Kelola banyak
+          cabang sekaligus dari satu akun terpusat.
+        </p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="bd bd-a">Scalable</span>
+          <span class="bd bd-s">Multi-Role</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ STATS ════════════════════════════════ -->
+<section class="py-24" style="background:var(--navy)">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-12 reveal">
+      <h2 class="fd font-bold text-3xl md:text-4xl text-white mb-2">
+        Dipercaya Pemilik Kos Se-Indonesia
+      </h2>
+      <p class="text-gray-400">Bergabung dengan ribuan pemilik kos yang sudah go digital</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="stat-c reveal">
+        <div class="fd font-extrabold text-5xl text-white mb-2">500+</div>
+        <div class="text-gray-400 text-sm">Pemilik Kos Aktif</div>
+      </div>
+      <div class="stat-c reveal" style="animation-delay:.1s">
+        <div class="fd font-extrabold text-5xl text-white mb-2">10K+</div>
+        <div class="text-gray-400 text-sm">Kamar Dikelola</div>
+      </div>
+      <div class="stat-c reveal" style="animation-delay:.2s">
+        <div class="fd font-extrabold text-5xl text-white mb-2">98%</div>
+        <div class="text-gray-400 text-sm">Tingkat Kepuasan</div>
+      </div>
+      <div class="stat-c reveal" style="animation-delay:.3s">
+        <div class="fd font-extrabold text-5xl text-white mb-2">Rp 2M+</div>
+        <div class="text-gray-400 text-sm">Diproses per Bulan (Miliar)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ HOW IT WORKS ══════════════════════════ -->
+<section id="cara-kerja" class="py-24" style="background:#F8FAFC">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-14 reveal">
+      <div class="chip mb-4">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>Cara Kerja
+      </div>
+      <h2 class="fd font-extrabold text-4xl md:text-5xl mb-4" style="color:var(--navy)">
+        Mulai dalam <span class="tg">3 Langkah Mudah</span>
+      </h2>
+      <p class="text-gray-500 text-lg">Setup hanya 10 menit. Tidak perlu keahlian teknis.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center reveal">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5
+          fd font-extrabold text-2xl text-white" style="background:var(--blue)">1</div>
+        <h3 class="fd font-bold text-xl mb-3" style="color:var(--navy)">Daftar & Setup Kos</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Buat akun gratis, masukkan data kos dan informasi kamar.
+          Pilih tipe dan harga tiap kamar sesuai kondisi.
+        </p>
+      </div>
+      <div class="text-center reveal" style="animation-delay:.15s">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5
+          fd font-extrabold text-2xl text-white" style="background:var(--emerald)">2</div>
+        <h3 class="fd font-bold text-xl mb-3" style="color:var(--navy)">Tambah Penghuni</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Input data penghuni, upload KTP, atur jadwal pembayaran,
+          dan tandatangani kontrak digital langsung di platform.
+        </p>
+      </div>
+      <div class="text-center reveal" style="animation-delay:.3s">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5
+          fd font-extrabold text-2xl text-white" style="background:var(--blue)">3</div>
+        <h3 class="fd font-bold text-xl mb-3" style="color:var(--navy)">Kelola & Pantau</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Dashboard langsung aktif. Reminder WhatsApp, invoice, dan laporan
+          keuangan berjalan 100% otomatis.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PRICING ══════════════════════════════ -->
+<section id="harga" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-14 reveal">
+      <div class="chip mb-4">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>Harga
+      </div>
+      <h2 class="fd font-extrabold text-4xl md:text-5xl mb-4" style="color:var(--navy)">
+        Harga <span class="tg">Transparan</span> & Terjangkau
+      </h2>
+      <p class="text-gray-500 text-lg">Mulai gratis. Upgrade kapan saja sesuai kebutuhan kamu.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto items-start">
+
+      <!-- Basic -->
+      <div class="card-p reveal">
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">BASIC</div>
+        <div class="fd font-extrabold text-4xl mb-1" style="color:var(--navy)">Gratis</div>
+        <div class="text-gray-400 text-sm mb-6">Selamanya</div>
+        <ul class="space-y-3 mb-8 text-sm">
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>1 Cabang Kos
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Maksimal 10 Kamar
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Manajemen Penghuni
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Invoice Manual
+          </li>
+          <li class="flex items-center gap-3 text-gray-300">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="#CBD5E1" stroke-width="2"/>
+              <line x1="15" y1="9" x2="9" y2="15" stroke="#CBD5E1" stroke-width="2"/>
+              <line x1="9" y1="9" x2="15" y2="15" stroke="#CBD5E1" stroke-width="2"/>
+            </svg>WhatsApp Otomatis
+          </li>
+          <li class="flex items-center gap-3 text-gray-300">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="#CBD5E1" stroke-width="2"/>
+              <line x1="15" y1="9" x2="9" y2="15" stroke="#CBD5E1" stroke-width="2"/>
+              <line x1="9" y1="9" x2="15" y2="15" stroke="#CBD5E1" stroke-width="2"/>
+            </svg>Payment Gateway
+          </li>
+        </ul>
+        <a href="login.html" class="btn-outline-dark">Mulai Gratis</a>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="card-p featured reveal relative" style="animation-delay:.1s;transform:scale(1.04)">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-white text-xs font-bold
+          px-4 py-1.5 rounded-full" style="background:var(--blue)">✦ PALING POPULER</div>
+        <div class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-2">PRO</div>
+        <div class="fd font-extrabold text-4xl text-white mb-1">Rp 149K</div>
+        <div class="text-gray-400 text-sm mb-6">/bulan per cabang</div>
+        <ul class="space-y-3 mb-8 text-sm">
+          <li class="flex items-center gap-3 text-gray-200">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>1 Cabang Kos
+          </li>
+          <li class="flex items-center gap-3 text-gray-200">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Kamar Tidak Terbatas
+          </li>
+          <li class="flex items-center gap-3 text-gray-200">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>WhatsApp Otomatis
+          </li>
+          <li class="flex items-center gap-3 text-gray-200">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>QRIS + Payment Gateway
+          </li>
+          <li class="flex items-center gap-3 text-gray-200">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Laporan PDF & Excel
+          </li>
+          <li class="flex items-center gap-3 text-gray-200">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Booking Online Publik
+          </li>
+        </ul>
+        <a href="login.html" class="btn-p w-full" style="justify-content:center">
+          Coba 30 Hari Gratis
+        </a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="card-p reveal" style="animation-delay:.2s">
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">ENTERPRISE</div>
+        <div class="fd font-extrabold text-4xl mb-1" style="color:var(--navy)">Custom</div>
+        <div class="text-gray-400 text-sm mb-6">Hubungi kami</div>
+        <ul class="space-y-3 mb-8 text-sm">
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Cabang Tidak Terbatas
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Semua Fitur Pro
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Custom API Integration
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>Dedicated Support
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>White Label
+          </li>
+          <li class="flex items-center gap-3 text-gray-600">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>SLA 99.9% Uptime
+          </li>
+        </ul>
+        <a href="#" class="btn-outline-dark">Hubungi Sales</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TESTIMONIALS ══════════════════════════ -->
+<section class="py-24" style="background:#F8FAFC">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-14 reveal">
+      <div class="chip mb-4">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>Testimoni
+      </div>
+      <h2 class="fd font-extrabold text-4xl md:text-5xl mb-4" style="color:var(--navy)">
+        Kata Mereka yang Sudah Pakai
+      </h2>
+      <p class="text-gray-500 text-lg max-w-xl mx-auto">
+        Lebih dari 500 pemilik kos aktif mempercayakan operasional mereka kepada SmartKos.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="card-t reveal">
+        <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+          "Dulu pakai grup WhatsApp buat reminder, sekarang semua otomatis. Hemat waktu
+          banget dan lebih profesional. Penghuni juga senang bisa lihat tagihan sendiri."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center
+            font-bold text-blue-600 text-sm flex-shrink-0" style="background:#DBEAFE">BH</div>
+          <div>
+            <div class="font-semibold text-sm" style="color:var(--navy)">Budi Hermawan</div>
+            <div class="text-gray-400 text-xs">Pemilik Kos Putra, Bandung · 25 kamar</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-t reveal" style="animation-delay:.1s">
+        <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+          "Punya 3 cabang kos di Jakarta dan Bekasi, dulu ribet banget koordinasi. Pakai
+          SmartKos sekarang bisa pantau semua dari HP. Laporan keuangan juga rapi."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center
+            font-bold text-emerald-600 text-sm flex-shrink-0" style="background:#D1FAE5">SR</div>
+          <div>
+            <div class="font-semibold text-sm" style="color:var(--navy)">Siti Rahayu</div>
+            <div class="text-gray-400 text-xs">Owner Multi-Cabang, Jakarta · 78 kamar</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-t reveal" style="animation-delay:.2s">
+        <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+          "Fitur booking online-nya keren. Banyak calon penghuni yang langsung booking
+          dari website. Tidak perlu COD lagi untuk tunjukin kamar ke calon penghuni."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center
+            font-bold text-blue-600 text-sm flex-shrink-0" style="background:#EFF6FF">AP</div>
+          <div>
+            <div class="font-semibold text-sm" style="color:var(--navy)">Ahmad Prasetyo</div>
+            <div class="text-gray-400 text-xs">Pemilik Kos Putri, Surabaya · 40 kamar</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FAQ ══════════════════════════════════ -->
+<section id="faq" class="py-24 bg-white">
+  <div class="max-w-3xl mx-auto px-5">
+    <div class="text-center mb-14 reveal">
+      <div class="chip mb-4">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="17" r=".5" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+        </svg>FAQ
+      </div>
+      <h2 class="fd font-extrabold text-4xl mb-4" style="color:var(--navy)">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+    </div>
+    <div id="faq-list">
+
+      <div class="faq-item reveal">
+        <button class="faq-btn" onclick="tFaq(this)">
+          <span>Apakah SmartKos bisa untuk kos dengan 40 kamar?</span>
+          <svg class="faq-ico flex-shrink-0" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-body">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">
+            Ya, SmartKos dirancang untuk kos skala apapun mulai 10 hingga ratusan kamar.
+            Paket Pro mendukung kamar tidak terbatas dalam satu cabang.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-btn" onclick="tFaq(this)">
+          <span>Bagaimana cara kerja reminder WhatsApp otomatis?</span>
+          <svg class="faq-ico flex-shrink-0" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-body">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">
+            Sistem mengirim pesan ke penghuni pada H-7, H-3, hari jatuh tempo, dan jika
+            terlambat. Template pesan bisa dikustomisasi sesuai gaya komunikasi kamu.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-btn" onclick="tFaq(this)">
+          <span>Apakah data penghuni aman di SmartKos?</span>
+          <svg class="faq-ico flex-shrink-0" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-body">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">
+            Keamanan data adalah prioritas kami. Semua data dienkripsi dengan SSL/TLS,
+            disimpan di server aman, dan tidak pernah dijual ke pihak ketiga.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-btn" onclick="tFaq(this)">
+          <span>Bisakah penghuni melakukan pembayaran sendiri?</span>
+          <svg class="faq-ico flex-shrink-0" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-body">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">
+            Ya. Penghuni punya portal sendiri untuk melihat tagihan, riwayat pembayaran,
+            dan bayar via transfer bank, QRIS, atau payment gateway yang terintegrasi.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-btn" onclick="tFaq(this)">
+          <span>Bagaimana jika saya punya lebih dari 1 cabang kos?</span>
+          <svg class="faq-ico flex-shrink-0" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-body">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">
+            Dengan paket Enterprise, kelola cabang tidak terbatas dari satu akun Owner.
+            Setiap cabang punya dashboard terpisah tapi dipantau dari satu tempat.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-btn" onclick="tFaq(this)">
+          <span>Berapa lama proses setup awal?</span>
+          <svg class="faq-ico flex-shrink-0" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-body">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">
+            Setup awal bisa selesai dalam 10 menit: daftar akun, tambah data kos, dan
+            input kamar. Tidak perlu keahlian teknis. Tim support kami siap membantu
+            jika ada kendala.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CTA ══════════════════════════════════ -->
+<section class="py-24" style="background:linear-gradient(135deg,#0B1D2E 0%,#1A3552 100%)">
+  <div class="max-w-4xl mx-auto px-5 text-center">
+    <div class="chip mb-6 reveal" style="background:rgba(37,99,235,.2);color:#93C5FD;
+      border:1px solid rgba(37,99,235,.3)">
+      <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>Mulai Sekarang
+    </div>
+    <h2 class="fd font-extrabold text-4xl md:text-5xl text-white mb-5 reveal">
+      Siap Kelola Kos Lebih Modern?
+    </h2>
+    <p class="text-gray-400 text-lg mb-10 reveal">
+      Trial 30 hari penuh, tanpa kartu kredit, setup 10 menit.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 reveal">
+      <a href="login.html" class="btn-p text-base px-10 py-3">Mulai Sekarang — Gratis</a>
+      <a href="dashboard.html" class="btn-s text-base px-10 py-3">Lihat Demo Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer style="background:#050F19">
+  <div class="max-w-7xl mx-auto px-5 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center"
+            style="background:var(--blue)">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2"/>
+              <polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2"/>
+            </svg>
+          </div>
+          <span class="fd font-bold text-xl text-white">SmartKos</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed max-w-xs mb-5">
+          Platform SaaS manajemen kos modern untuk Indonesia. Otomasi penuh, data aman,
+          dan mudah digunakan siapa pun.
+        </p>
+        <div class="flex items-center gap-3">
+          <a href="#" class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+            style="background:rgba(255,255,255,.08)"
+            onmouseover="this.style.background='rgba(255,255,255,.16)'"
+            onmouseout="this.style.background='rgba(255,255,255,.08)'"
+            aria-label="Instagram">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+            </svg>
+          </a>
+          <a href="#" class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+            style="background:rgba(255,255,255,.08)"
+            onmouseover="this.style.background='rgba(255,255,255,.16)'"
+            onmouseout="this.style.background='rgba(255,255,255,.08)'"
+            aria-label="WhatsApp Support">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7
+                8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8
+                8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+                stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-white text-sm mb-4">Produk</h4>
+        <ul class="space-y-3 text-sm text-gray-400">
+          <li><a href="#fitur" class="hover:text-white transition-colors">Fitur</a></li>
+          <li><a href="#harga" class="hover:text-white transition-colors">Harga</a></li>
+          <li><a href="dashboard.html" class="hover:text-white transition-colors">Demo Dashboard</a></li>
+          <li><a href="booking.html" class="hover:text-white transition-colors">Booking Online</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-white text-sm mb-4">Dukungan</h4>
+        <ul class="space-y-3 text-sm text-gray-400">
+          <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
+          <li><a href="login.html" class="hover:text-white transition-colors">Masuk / Daftar</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">WhatsApp Support</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Panduan Pengguna</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4"
+      style="border-color:rgba(255,255,255,.08)">
+      <div class="text-gray-500 text-sm">© 2025 SmartKos. All rights reserved.</div>
+      <div class="flex gap-6 text-sm text-gray-500">
+        <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+        <a href="#" class="hover:text-white transition-colors">Syarat Layanan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu toggle
+document.getElementById('mob-btn').addEventListener('click', () => {
+  document.getElementById('mob-menu').classList.toggle('hidden');
+});
+
+// FAQ accordion
+function tFaq(btn) {
+  const body = btn.nextElementSibling;
+  const ico  = btn.querySelector('.faq-ico');
+  document.querySelectorAll('.faq-body.open').forEach(el => {
+    if (el !== body) {
+      el.classList.remove('open');
+      el.previousElementSibling.querySelector('.faq-ico').style.transform = 'rotate(0)';
+    }
+  });
+  body.classList.toggle('open');
+  ico.style.transform  = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+  ico.style.transition = 'transform .3s';
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) {
+      t.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('mob-menu').classList.add('hidden');
+    }
+  });
+});
+
+// Navbar background on scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('.nav').style.background =
+    window.scrollY > 20 ? 'rgba(5,15,25,.97)' : 'rgba(11,29,46,.92)';
+});
+</script>
+</body>
+</html>

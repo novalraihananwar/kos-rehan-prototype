@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manajemen Penghuni — SmartKos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.av-blue{background:#DBEAFE;color:#1E40AF}.av-green{background:#D1FAE5;color:#065F46}.av-amber{background:#FEF3C7;color:#92400E}.av-red{background:#FEE2E2;color:#991B1B}.av-purple{background:#F5F3FF;color:#5B21B6}
+.tab-nav{display:flex;gap:1px;background:#F1F5F9;border-radius:10px;padding:4px}
+.tab-nav-btn{padding:7px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;color:#64748B;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+.tab-nav-btn.active{background:#fff;color:#0B1D2E;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.detail-section{margin-bottom:20px}
+.detail-section-title{font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #F1F5F9}
+.detail-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:14px;border-bottom:1px solid #F8FAFC}
+.detail-row:last-child{border-bottom:none}
+.detail-key{color:#64748B}
+.detail-val{font-weight:600;color:#0B1D2E;text-align:right}
+</style>
+</head>
+<body>
+<div class="app-layout">
+<aside class="app-sidebar" id="app-sidebar">
+  <div class="sidebar-brand"><div class="sidebar-brand-logo"><div class="sidebar-logo-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2.5"/><polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2.5"/></svg></div><div><div class="sidebar-brand-name">SmartKos</div><div class="sidebar-prop-name">Kos Harmoni Residence</div></div></div></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section"><div class="sidebar-section-label">Menu Utama</div>
+      <a href="dashboard.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>Dashboard</a>
+      <a href="rooms.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/></svg>Kamar <span class="sidebar-badge">40</span></a>
+      <a href="tenants.html" class="sidebar-link active"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>Penghuni <span class="sidebar-badge">28</span></a>
+      <a href="payments.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/></svg>Pembayaran</a>
+      <a href="complaints.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="currentColor" stroke-width="2"/></svg>Komplain</a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Keuangan</div>
+      <a href="reports.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Laporan</a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Pengaturan</div>
+      <a href="wa-settings.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="2"/></svg>WhatsApp</a>
+      <a href="booking.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2"/></svg>Booking Online</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer"><div class="sidebar-user"><div class="sidebar-avatar">HK</div><div class="sidebar-user-info"><div class="sidebar-user-name">Hendra Kusuma</div><div class="sidebar-user-role">Owner</div></div><a href="login.html" title="Keluar"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="app-main">
+<header class="app-topbar">
+  <button id="sidebar-toggle" class="btn btn-ghost btn-icon md:hidden"><svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <div class="flex-1"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#0B1D2E">Manajemen Penghuni</div><div style="font-size:12px;color:#94A3B8">28 penghuni aktif</div></div>
+  <div class="flex items-center gap-3">
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-add-tenant')">+ Tambah Penghuni</button>
+    <div style="width:34px;height:34px;border-radius:50%;background:#0B1D2E;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700">HK</div>
+  </div>
+</header>
+
+<div class="app-content">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Daftar Penghuni</div>
+      <div class="page-sub">Kelola data, kontrak, dan riwayat pembayaran penghuni</div>
+    </div>
+    <div class="flex gap-2">
+      <button class="btn btn-outline btn-sm" onclick="showToast('Export Excel berhasil!','success')">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Export
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#DBEAFE;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2563EB" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="2"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Total Aktif</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#0B1D2E">28</div></div></div>
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#D1FAE5;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#059669" stroke-width="2"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Lunas</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#059669">23</div></div></div>
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#FEF3C7;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#D97706" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#D97706" stroke-width="2" stroke-linecap="round"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Pending</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#D97706">3</div></div></div>
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#FEE2E2;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="#DC2626" stroke-width="2"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Terlambat</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#DC2626">2</div></div></div>
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="card mb-0">
+    <div class="flex items-center gap-3 p-4 border-b" style="border-color:#F1F5F9;flex-wrap:wrap">
+      <div style="position:relative">
+        <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%)" width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke="#94A3B8" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="tenant-search" type="text" placeholder="Cari nama, kamar, atau no. HP..." style="padding:8px 14px 8px 32px;border:1.5px solid #E2E8F0;border-radius:9px;font-size:13px;font-family:inherit;outline:none;width:260px" oninput="filterTenants()" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+      </div>
+      <select id="status-filter" class="form-select" style="width:140px;font-size:13px" onchange="filterTenants()">
+        <option value="">Semua Status</option>
+        <option value="lunas">Lunas</option>
+        <option value="pending">Pending</option>
+        <option value="terlambat">Terlambat</option>
+      </select>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead><tr style="background:#F8FAFC">
+          <th style="padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap">Penghuni</th>
+          <th style="padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Kamar</th>
+          <th style="padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap">No. HP</th>
+          <th style="padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap">Masuk</th>
+          <th style="padding:11px 16px;text-align:right;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Sewa/Bln</th>
+          <th style="padding:11px 16px;text-align:center;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Status</th>
+          <th style="padding:11px 16px;text-align:center;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Aksi</th>
+        </tr></thead>
+        <tbody id="tenant-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</main>
+</div>
+
+<!-- Tenant Detail Modal -->
+<div id="modal-tenant" class="modal-overlay" style="display:none">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-tenant-title">Detail Penghuni</div>
+      <button class="modal-close" onclick="closeModal('modal-tenant')">×</button>
+    </div>
+    <div id="modal-tenant-body"></div>
+  </div>
+</div>
+
+<!-- Add Tenant Modal -->
+<div id="modal-add-tenant" class="modal-overlay" style="display:none">
+  <div class="modal modal-lg">
+    <div class="modal-header"><div class="modal-title">Tambah Penghuni Baru</div><button class="modal-close" onclick="closeModal('modal-add-tenant')">×</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="form-group"><label class="form-label">Nama Lengkap *</label><input type="text" class="form-input" placeholder="Nama sesuai KTP"></div>
+      <div class="form-group"><label class="form-label">No. WhatsApp *</label><input type="tel" class="form-input" placeholder="0812xxxxxxxx"></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="email@example.com"></div>
+      <div class="form-group"><label class="form-label">Jenis Kelamin</label><select class="form-select"><option>Laki-laki</option><option>Perempuan</option></select></div>
+      <div class="form-group"><label class="form-label">Kamar *</label><select class="form-select" id="sel-room"></select></div>
+      <div class="form-group"><label class="form-label">Tanggal Masuk *</label><input type="date" class="form-input"></div>
+      <div class="form-group"><label class="form-label">Durasi Sewa</label><select class="form-select"><option>1 bulan</option><option>3 bulan</option><option selected>6 bulan</option><option>12 bulan</option></select></div>
+      <div class="form-group"><label class="form-label">Pekerjaan</label><input type="text" class="form-input" placeholder="Mahasiswa, Karyawan, dsb."></div>
+    </div>
+    <div class="form-group"><label class="form-label">No. HP Darurat</label><input type="tel" class="form-input" placeholder="Kontak keluarga/kerabat"></div>
+    <div class="form-group"><label class="form-label">Upload Foto KTP</label><input type="file" class="form-input" accept="image/*"></div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('modal-add-tenant')">Batal</button><button class="btn btn-primary" onclick="showToast('Penghuni berhasil ditambahkan!','success');closeModal('modal-add-tenant')">Simpan Penghuni</button></div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const avatarColors = ['av-blue','av-green','av-amber','av-red','av-purple'];
+function getInitials(name){return name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()}
+
+function renderTenants(list){
+  const tbody=document.getElementById('tenant-tbody');
+  if(!list.length){tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:48px;color:#94A3B8">Tidak ada penghuni ditemukan</td></tr>`;return}
+  tbody.innerHTML=list.map((t,i)=>{
+    const av=avatarColors[i%avatarColors.length];
+    const statusCls={lunas:'badge badge-green',pending:'badge badge-amber',terlambat:'badge badge-red'}[t.payStatus]||'badge badge-gray';
+    const statusLbl={lunas:'Lunas',pending:'Pending',terlambat:'Terlambat'}[t.payStatus]||t.payStatus;
+    return`<tr style="border-bottom:1px solid #F1F5F9;cursor:pointer" onmouseenter="this.style.background='#F8FAFC'" onmouseleave="this.style.background=''" onclick="openTenantDetail('${t.id}')">
+      <td style="padding:12px 16px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="avatar ${av}">${getInitials(t.name)}</div>
+          <div><div style="font-weight:600;color:#0B1D2E;font-size:14px">${t.name}</div><div style="font-size:12px;color:#94A3B8">${t.email}</div></div>
+        </div>
+      </td>
+      <td style="padding:12px 16px"><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#0B1D2E">${t.room}</span></td>
+      <td style="padding:12px 16px;color:#475569;font-size:13px">${t.phone}</td>
+      <td style="padding:12px 16px;color:#64748B;font-size:13px;white-space:nowrap">${new Date(t.checkIn).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}</td>
+      <td style="padding:12px 16px;text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:#0B1D2E;font-size:13px">${SK.formatRupiah(t.price)}</td>
+      <td style="padding:12px 16px;text-align:center"><span class="${statusCls}">${statusLbl}</span></td>
+      <td style="padding:12px 16px;text-align:center">
+        <div style="display:flex;justify-content:center;gap:5px">
+          <button title="WA" onclick="event.stopPropagation();showToast('WhatsApp dibuka: ${t.phone}','success')" style="padding:6px;border-radius:7px;background:#DCFCE7;border:none;cursor:pointer"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <button title="Invoice" onclick="event.stopPropagation();window.location='payments.html'" style="padding:6px;border-radius:7px;background:#DBEAFE;border:none;cursor:pointer"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" stroke="#2563EB" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="#2563EB" stroke-width="2"/></svg></button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filterTenants(){
+  const q=document.getElementById('tenant-search').value.toLowerCase();
+  const st=document.getElementById('status-filter').value;
+  let list=SK.tenants;
+  if(q) list=list.filter(t=>t.name.toLowerCase().includes(q)||t.room.toLowerCase().includes(q)||t.phone.includes(q)||t.email.toLowerCase().includes(q));
+  if(st) list=list.filter(t=>t.payStatus===st);
+  renderTenants(list);
+}
+
+function openTenantDetail(id){
+  const t=SK.getTenantById(id);
+  if(!t)return;
+  document.getElementById('modal-tenant-title').textContent=t.name;
+  const pays=SK.payments.filter(p=>p.tenantId===id).slice(0,5);
+  document.getElementById('modal-tenant-body').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="detail-section">
+          <div class="detail-section-title">Informasi Pribadi</div>
+          <div class="detail-row"><span class="detail-key">Nama</span><span class="detail-val">${t.name}</span></div>
+          <div class="detail-row"><span class="detail-key">No. WhatsApp</span><a href="#" class="detail-val" style="color:#2563EB" onclick="showToast('Membuka WA: ${t.phone}','success')">${t.phone}</a></div>
+          <div class="detail-row"><span class="detail-key">Email</span><span class="detail-val" style="font-size:13px">${t.email}</span></div>
+          <div class="detail-row"><span class="detail-key">Jenis Kelamin</span><span class="detail-val">${t.gender==='L'?'Laki-laki':'Perempuan'}</span></div>
+          <div class="detail-row"><span class="detail-key">Pekerjaan</span><span class="detail-val">${t.job}</span></div>
+          <div class="detail-row"><span class="detail-key">Kontak Darurat</span><span class="detail-val" style="font-size:12px">${t.emergency}</span></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-title">Info Sewa</div>
+          <div class="detail-row"><span class="detail-key">Kamar</span><span class="detail-val" style="font-family:'JetBrains Mono',monospace">${t.room}</span></div>
+          <div class="detail-row"><span class="detail-key">Tanggal Masuk</span><span class="detail-val">${new Date(t.checkIn).toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'})}</span></div>
+          <div class="detail-row"><span class="detail-key">Durasi Sewa</span><span class="detail-val">${t.duration} bulan</span></div>
+          <div class="detail-row"><span class="detail-key">Harga/Bulan</span><span class="detail-val" style="color:#2563EB;font-family:'JetBrains Mono',monospace">${SK.formatRupiah(t.price)}</span></div>
+          <div class="detail-row"><span class="detail-key">Jatuh Tempo</span><span class="detail-val" style="color:${t.payStatus==='terlambat'?'#DC2626':'#0B1D2E'}">${new Date(t.dueDate).toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'})}</span></div>
+          <div class="detail-row"><span class="detail-key">Status Bayar</span><span class="${t.payStatus==='lunas'?'badge badge-green':t.payStatus==='terlambat'?'badge badge-red':'badge badge-amber'}">${{lunas:'Lunas',terlambat:'Terlambat',pending:'Pending'}[t.payStatus]||t.payStatus}</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="detail-section">
+          <div class="detail-section-title">Riwayat Pembayaran Terakhir</div>
+          ${pays.length?pays.map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;background:#F8FAFC;margin-bottom:6px">
+            <div><div style="font-size:13px;font-weight:600;color:#0B1D2E">${p.month}</div><div style="font-size:11px;color:#94A3B8">${p.method||'—'} · ${p.paidDate?new Date(p.paidDate).toLocaleDateString('id-ID',{day:'2-digit',month:'short'}):'Belum bayar'}</div></div>
+            <span class="${p.status==='lunas'?'badge badge-green':p.status==='terlambat'?'badge badge-red':p.status==='menunggu'?'badge badge-blue':'badge badge-amber'}">${{lunas:'Lunas',pending:'Pending',terlambat:'Telat',menunggu:'Verifikasi'}[p.status]||p.status}</span>
+          </div>`).join(''):'<div style="color:#94A3B8;font-size:13px;padding:12px 0">Belum ada riwayat pembayaran</div>'}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <button class="btn btn-primary btn-sm" onclick="showToast('Reminder WA terkirim ke ${t.name}','success')">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="white" stroke-width="2"/></svg>
+            Kirim Reminder WhatsApp
+          </button>
+          <button class="btn btn-success btn-sm" onclick="window.location='payments.html'">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" stroke="white" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="white" stroke-width="2"/></svg>
+            Lihat Semua Invoice
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="showToast('Download kontrak...','info')">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/></svg>
+            Download Kontrak
+          </button>
+        </div>
+      </div>
+    </div>`;
+  openModal('modal-tenant');
+}
+
+// Populate room select
+const selRoom=document.getElementById('sel-room');
+SK.rooms.filter(r=>r.status==='kosong').forEach(r=>{
+  const opt=document.createElement('option');
+  opt.value=r.id;
+  opt.textContent=`${r.id} (${r.type} · ${SK.formatRupiah(r.price)}/bln)`;
+  selRoom.appendChild(opt);
+});
+
+renderTenants(SK.tenants);
+</script>
+</body>
+</html>

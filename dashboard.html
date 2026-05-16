@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — SmartKos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.kpi-blue   {background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff}
+.kpi-green  {background:linear-gradient(135deg,#059669,#047857);color:#fff}
+.kpi-amber  {background:linear-gradient(135deg,#D97706,#B45309);color:#fff}
+.kpi-red    {background:linear-gradient(135deg,#DC2626,#B91C1C);color:#fff}
+.kpi-navy   {background:linear-gradient(135deg,#0B1D2E,#1A3552);color:#fff}
+.kpi-slate  {background:#fff;border:1px solid #E2E8F0}
+.kpi-card   {border-radius:14px;padding:20px;display:flex;align-items:flex-start;gap:14px}
+.notif-dot  {width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.activity-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #F1F5F9}
+.activity-item:last-child{border-bottom:none}
+.quick-action{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border:1.5px solid #E2E8F0;border-radius:12px;cursor:pointer;transition:all .2s;text-align:center;background:#fff}
+.quick-action:hover{border-color:#2563EB;background:#EFF6FF;transform:translateY(-2px)}
+</style>
+</head>
+<body>
+<div class="app-layout">
+<!-- SIDEBAR -->
+<aside class="app-sidebar" id="app-sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-logo">
+      <div class="sidebar-logo-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2.5"/><polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2.5"/></svg></div>
+      <div><div class="sidebar-brand-name">SmartKos</div><div class="sidebar-prop-name">Kos Harmoni Residence</div></div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Menu Utama</div>
+      <a href="dashboard.html" class="sidebar-link active"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>Dashboard</a>
+      <a href="rooms.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Kamar <span class="sidebar-badge">40</span></a>
+      <a href="tenants.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Penghuni <span class="sidebar-badge">28</span></a>
+      <a href="payments.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2" stroke="currentColor" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/></svg>Pembayaran <span class="sidebar-badge" style="background:rgba(239,68,68,.4)">3</span></a>
+      <a href="complaints.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Komplain <span class="sidebar-badge" style="background:rgba(239,68,68,.4)">4</span></a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Keuangan</div>
+      <a href="reports.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Laporan</a>
+      <a href="payments.html#invoices" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Invoice</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Pengaturan</div>
+      <a href="wa-settings.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>WhatsApp</a>
+      <a href="booking.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Booking Online</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">HK</div>
+      <div class="sidebar-user-info"><div class="sidebar-user-name">Hendra Kusuma</div><div class="sidebar-user-role">Owner</div></div>
+      <a href="login.html" title="Keluar"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- MAIN -->
+<main class="app-main">
+<!-- TOPBAR -->
+<header class="app-topbar">
+  <button id="sidebar-toggle" class="md:hidden btn btn-ghost btn-icon">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <div class="flex-1">
+    <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#0B1D2E">Dashboard</div>
+    <div style="font-size:12px;color:#94A3B8">Senin, 27 Oktober 2025</div>
+  </div>
+  <!-- Notif + User -->
+  <div class="flex items-center gap-3">
+    <button class="btn btn-ghost btn-icon relative" onclick="showToast('5 reminder WhatsApp terkirim hari ini','info')">
+      <svg width="19" height="19" fill="none" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:#EF4444;border-radius:50%;border:2px solid white"></span>
+    </button>
+    <div style="width:1px;height:24px;background:#E2E8F0"></div>
+    <div class="flex items-center gap-2">
+      <div style="width:34px;height:34px;border-radius:50%;background:#0B1D2E;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;cursor:pointer" onclick="showToast('Akun: Hendra Kusuma (Owner)','info')">HK</div>
+      <div class="hidden sm:block">
+        <div style="font-size:13px;font-weight:600;color:#0B1D2E">Hendra Kusuma</div>
+        <div style="font-size:11px;color:#94A3B8">Owner</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="app-content">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="page-title">Ringkasan Oktober 2025</div>
+      <div class="page-sub">Kos Harmoni Residence · 40 Kamar · Lantai 1-4</div>
+    </div>
+    <div class="flex gap-2">
+      <a href="reports.html" class="btn btn-outline btn-sm">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Export
+      </a>
+      <a href="rooms.html" class="btn btn-primary btn-sm">+ Tambah Penghuni</a>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+    <div class="kpi-card kpi-blue" style="grid-column:span 2">
+      <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" stroke="white" stroke-width="2"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;opacity:.8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">Total Pemasukan Okt 2025</div>
+        <div class="font-mono" style="font-size:22px;font-weight:700" id="kpi-income">Rp 32.500.000</div>
+        <div style="font-size:12px;opacity:.75;margin-top:2px">↑ 4.2% dari Sep 2025</div>
+      </div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div style="width:40px;height:40px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;opacity:.8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px">Kamar Terisi</div>
+        <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800">28<span style="font-size:14px;opacity:.7">/40</span></div>
+        <div style="font-size:12px;opacity:.75">70% Okupansi</div>
+      </div>
+    </div>
+    <div class="kpi-card kpi-slate">
+      <div style="width:40px;height:40px;background:#F1F5F9;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#64748B" stroke-width="2"/></svg>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px">Kamar Kosong</div>
+        <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#0B1D2E">7</div>
+        <div style="font-size:12px;color:#64748B">+ 3 Booking</div>
+      </div>
+    </div>
+    <div class="kpi-card kpi-red">
+      <div style="width:40px;height:40px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="12" stroke="white" stroke-width="2"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;opacity:.8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px">Telat Bayar</div>
+        <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800">2</div>
+        <div style="font-size:12px;opacity:.75">K-107, K-118</div>
+      </div>
+    </div>
+    <div class="kpi-card kpi-navy">
+      <div style="width:40px;height:40px;background:rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="white" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;opacity:.8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px">Penghuni Aktif</div>
+        <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#fff">28</div>
+        <div style="font-size:12px;opacity:.6">+3 bulan ini</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+    <!-- Monthly Income Chart -->
+    <div class="card p-5 lg:col-span-2">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <div class="page-title" style="font-size:15px">Grafik Pemasukan 2025</div>
+          <div class="page-sub" style="font-size:12px">Total pemasukan bulanan vs target</div>
+        </div>
+        <select style="font-size:12px;padding:5px 10px;border:1px solid #E2E8F0;border-radius:7px;background:#fff;color:#475569;font-family:inherit">
+          <option>2025</option><option>2024</option>
+        </select>
+      </div>
+      <canvas id="chartIncome" height="240"></canvas>
+    </div>
+    <!-- Donut: Occupancy -->
+    <div class="card p-5 flex flex-col">
+      <div class="page-title" style="font-size:15px;margin-bottom:4px">Status Kamar</div>
+      <div class="page-sub" style="font-size:12px;margin-bottom:16px">Distribusi 40 kamar</div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative">
+        <canvas id="chartOccupancy" width="180" height="180"></canvas>
+        <div style="position:absolute;text-align:center">
+          <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#0B1D2E">70%</div>
+          <div style="font-size:11px;color:#94A3B8">Okupansi</div>
+        </div>
+      </div>
+      <div class="space-y-2 mt-4">
+        <div class="flex justify-between items-center text-sm"><span class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#059669;display:inline-block"></span>Terisi</span><span class="font-semibold" style="color:#0B1D2E">28</span></div>
+        <div class="flex justify-between items-center text-sm"><span class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#94A3B8;display:inline-block"></span>Kosong</span><span class="font-semibold" style="color:#0B1D2E">7</span></div>
+        <div class="flex justify-between items-center text-sm"><span class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;display:inline-block"></span>Booking</span><span class="font-semibold" style="color:#0B1D2E">3</span></div>
+        <div class="flex justify-between items-center text-sm"><span class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#EF4444;display:inline-block"></span>Telat Bayar</span><span class="font-semibold" style="color:#0B1D2E">2</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Row: Recent Payments + Activity -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+    <!-- Recent Payments -->
+    <div class="card">
+      <div class="p-5 border-b" style="border-color:#F1F5F9">
+        <div class="flex justify-between items-center">
+          <div class="page-title" style="font-size:15px">Pembayaran Terkini</div>
+          <a href="payments.html" class="text-sm font-semibold" style="color:#2563EB">Lihat Semua →</a>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table id="tbl-payments" style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr style="background:#F8FAFC">
+            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Penghuni</th>
+            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Kamar</th>
+            <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Jumlah</th>
+            <th style="padding:10px 16px;text-align:center;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em">Status</th>
+          </tr></thead>
+          <tbody id="tbody-payments"></tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Activity Feed -->
+    <div class="card p-5">
+      <div class="flex justify-between items-center mb-4">
+        <div class="page-title" style="font-size:15px">Aktivitas Terbaru</div>
+        <span class="badge badge-blue text-xs">Live</span>
+      </div>
+      <div id="activity-list"></div>
+      <!-- Quick Actions -->
+      <div class="mt-5 pt-4 border-t" style="border-color:#F1F5F9">
+        <div style="font-size:12px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Aksi Cepat</div>
+        <div class="grid grid-cols-4 gap-2">
+          <div class="quick-action" onclick="window.location='payments.html'">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <span style="font-size:11px;font-weight:600;color:#0B1D2E">Invoice</span>
+          </div>
+          <div class="quick-action" onclick="window.location='wa-settings.html'">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size:11px;font-weight:600;color:#0B1D2E">WA Blast</span>
+          </div>
+          <div class="quick-action" onclick="window.location='reports.html'">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size:11px;font-weight:600;color:#0B1D2E">Laporan</span>
+          </div>
+          <div class="quick-action" onclick="window.location='rooms.html'">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#EA580C" stroke-width="2"/></svg>
+            <span style="font-size:11px;font-weight:600;color:#0B1D2E">Kamar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerts Row -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Late Payments Alert -->
+    <div class="card p-5" style="border-left:3px solid #EF4444">
+      <div class="flex items-center gap-2 mb-3">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size:14px;font-weight:700;color:#0B1D2E">Penghuni Telat Bayar</span>
+        <span class="badge badge-red ml-auto">2 orang</span>
+      </div>
+      <div class="space-y-2" id="late-list"></div>
+      <button class="btn btn-danger btn-sm mt-3" onclick="showToast('Reminder WhatsApp dikirim ke 2 penghuni','success')">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="white" stroke-width="2"/></svg>
+        Kirim Reminder WA Sekarang
+      </button>
+    </div>
+    <!-- Booking Pending Alert -->
+    <div class="card p-5" style="border-left:3px solid #F59E0B">
+      <div class="flex items-center gap-2 mb-3">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="#F59E0B" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="#F59E0B" stroke-width="2"/></svg>
+        <span style="font-size:14px;font-weight:700;color:#0B1D2E">Booking Menunggu Konfirmasi</span>
+        <span class="badge badge-amber ml-auto">3 booking</span>
+      </div>
+      <div class="space-y-2" id="booking-list"></div>
+      <a href="booking.html#manage" class="btn btn-outline btn-sm mt-3">Kelola Booking →</a>
+    </div>
+  </div>
+</div>
+</main>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+// Render payments table
+const tBody = document.getElementById('tbody-payments');
+SK.payments.slice(0,8).forEach(p => {
+  const t = SK.getTenantById(p.tenantId);
+  const name = t ? t.name : '—';
+  const statusMap = {lunas:'<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;background:#D1FAE5;color:#065F46"><span style="width:5px;height:5px;border-radius:50%;background:currentColor"></span>Lunas</span>',pending:'<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;background:#FEF3C7;color:#92400E">Pending</span>',terlambat:'<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;background:#FEE2E2;color:#991B1B">Telat</span>',menunggu:'<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;background:#DBEAFE;color:#1E40AF">Verifikasi</span>'};
+  tBody.innerHTML += `<tr style="border-bottom:1px solid #F1F5F9">
+    <td style="padding:11px 16px;color:#1E293B;font-weight:500">${name}</td>
+    <td style="padding:11px 16px;color:#64748B">${p.room}</td>
+    <td style="padding:11px 16px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:13px;color:#0B1D2E;font-weight:600">${SK.formatRupiah(p.amount)}</td>
+    <td style="padding:11px 16px;text-align:center">${statusMap[p.status]||p.status}</td>
+  </tr>`;
+});
+
+// Activity list
+const aList = document.getElementById('activity-list');
+const iconColors = {green:'#059669',blue:'#2563EB',amber:'#F59E0B',red:'#EF4444',gray:'#94A3B8'};
+SK.activities.forEach(a => {
+  aList.innerHTML += `<div class="activity-item">
+    <div class="notif-dot" style="background:${iconColors[a.icon]}"></div>
+    <div style="flex:1"><div style="font-size:13px;color:#1E293B;font-weight:500">${a.text}</div><div style="font-size:11px;color:#94A3B8;margin-top:2px">${a.time}</div></div>
+  </div>`;
+});
+
+// Late payments
+const lateList = document.getElementById('late-list');
+SK.tenants.filter(t=>t.payStatus==='terlambat').forEach(t => {
+  lateList.innerHTML += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#FEF2F2;border-radius:8px">
+    <div><div style="font-size:13px;font-weight:600;color:#0B1D2E">${t.name}</div><div style="font-size:11px;color:#DC2626">${t.room} · Jatuh tempo: ${new Date(t.dueDate).toLocaleDateString('id-ID',{day:'2-digit',month:'short'})}</div></div>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#DC2626">${SK.formatRupiah(t.price)}</span>
+  </div>`;
+});
+
+// Bookings
+const bList = document.getElementById('booking-list');
+SK.bookings.slice(0,2).forEach(b => {
+  bList.innerHTML += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#FFFBEB;border-radius:8px">
+    <div><div style="font-size:13px;font-weight:600;color:#0B1D2E">${b.name}</div><div style="font-size:11px;color:#D97706">${b.room} · Masuk: ${new Date(b.startDate).toLocaleDateString('id-ID',{day:'2-digit',month:'short'})}</div></div>
+    <span style="font-size:11px;font-weight:600;padding:2px 8px;background:#FEF3C7;color:#92400E;border-radius:99px">${b.status}</span>
+  </div>`;
+});
+
+// Charts
+const months = SK.monthlyIncome.map(m=>m.month);
+const income = SK.monthlyIncome.map(m=>m.income);
+const target = SK.monthlyIncome.map(m=>m.target);
+
+new Chart(document.getElementById('chartIncome'),{
+  type:'bar',
+  data:{
+    labels:months,
+    datasets:[
+      {label:'Pemasukan',data:income,backgroundColor:income.map((v,i)=>i===9?'#2563EB':'rgba(37,99,235,.55)'),borderRadius:6,borderSkipped:false},
+      {label:'Target',data:target,type:'line',borderColor:'#059669',backgroundColor:'transparent',borderWidth:2,borderDash:[4,4],pointRadius:0,tension:.4}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{font:{size:12,family:'Plus Jakarta Sans'},usePointStyle:true,pointStyleWidth:8,padding:16}}},
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:11,family:'Plus Jakarta Sans'},color:'#94A3B8'}},
+      y:{grid:{color:'#F1F5F9'},ticks:{font:{size:11,family:'Plus Jakarta Sans'},color:'#94A3B8',callback:v=>v>0?'Rp '+(v/1000000)+'Jt':'0'}}
+    }
+  }
+});
+
+new Chart(document.getElementById('chartOccupancy'),{
+  type:'doughnut',
+  data:{
+    labels:['Terisi','Kosong','Booking','Telat'],
+    datasets:[{data:[28,7,3,2],backgroundColor:['#059669','#94A3B8','#F59E0B','#EF4444'],borderWidth:0,hoverOffset:4}]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,cutout:'72%',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.label+': '+c.raw+' kamar'}}}
+  }
+});
+</script>
+</body>
+</html>

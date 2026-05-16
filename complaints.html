@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komplain Fasilitas — SmartKos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<div class="app-layout">
+<aside class="app-sidebar" id="app-sidebar">
+  <div class="sidebar-brand"><div class="sidebar-brand-logo"><div class="sidebar-logo-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2.5"/><polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2.5"/></svg></div><div><div class="sidebar-brand-name">SmartKos</div><div class="sidebar-prop-name">Kos Harmoni Residence</div></div></div></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section"><div class="sidebar-section-label">Menu Utama</div>
+      <a href="dashboard.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>Dashboard</a>
+      <a href="rooms.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/></svg>Kamar</a>
+      <a href="tenants.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>Penghuni</a>
+      <a href="payments.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/></svg>Pembayaran</a>
+      <a href="complaints.html" class="sidebar-link active"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="currentColor" stroke-width="2"/></svg>Komplain <span class="sidebar-badge" style="background:rgba(239,68,68,.4)">4</span></a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Keuangan</div>
+      <a href="reports.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Laporan</a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Pengaturan</div>
+      <a href="wa-settings.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="2"/></svg>WhatsApp</a>
+      <a href="booking.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2"/></svg>Booking Online</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer"><div class="sidebar-user"><div class="sidebar-avatar">HK</div><div class="sidebar-user-info"><div class="sidebar-user-name">Hendra Kusuma</div><div class="sidebar-user-role">Owner</div></div></div></div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="app-main">
+<header class="app-topbar">
+  <button id="sidebar-toggle" class="btn btn-ghost btn-icon md:hidden"><svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <div class="flex-1"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#0B1D2E">Komplain Fasilitas</div><div style="font-size:12px;color:#94A3B8">4 komplain aktif</div></div>
+  <div style="width:34px;height:34px;border-radius:50%;background:#0B1D2E;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700">HK</div>
+</header>
+
+<div class="app-content">
+  <div class="page-header">
+    <div><div class="page-title">Laporan Komplain</div><div class="page-sub">Pantau dan kelola semua laporan kerusakan dari penghuni</div></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4 flex items-center gap-3">
+      <div style="width:36px;height:36px;border-radius:9px;background:#FEF3C7;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#D97706" stroke-width="2"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="#D97706" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Pending</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#D97706">2</div></div>
+    </div>
+    <div class="card p-4 flex items-center gap-3">
+      <div style="width:36px;height:36px;border-radius:9px;background:#DBEAFE;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="2"/><polyline points="12 6 12 12 16 14" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Diproses</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#2563EB">2</div></div>
+    </div>
+    <div class="card p-4 flex items-center gap-3">
+      <div style="width:36px;height:36px;border-radius:9px;background:#D1FAE5;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#059669" stroke-width="2"/></svg></div>
+      <div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Selesai</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#059669">2</div></div>
+    </div>
+    <div class="card p-4 flex items-center gap-3">
+      <div style="width:36px;height:36px;border-radius:9px;background:#F1F5F9;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13" stroke="#64748B" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Total</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#64748B">6</div></div>
+    </div>
+  </div>
+
+  <!-- Complaints list -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="complaint-grid"></div>
+</div>
+</main>
+</div>
+
+<!-- Complaint Detail Modal -->
+<div id="modal-complaint" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Detail Komplain</div><button class="modal-close" onclick="closeModal('modal-complaint')">×</button></div>
+    <div id="modal-complaint-body"></div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const catIcon={
+  WiFi:'<path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  Listrik:'<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  AC:'<path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1010 16H2m15.73-8.27A2 2 0 1119 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  'Kamar Mandi':'<path d="M7 21v-4a2 2 0 012-2h6a2 2 0 012 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 21h18M3 10l9-9 9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  Lainnya:'<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+};
+const priorityCls={tinggi:'badge badge-red',sedang:'badge badge-amber',rendah:'badge badge-gray'};
+const statusCls={pending:'badge badge-amber',diproses:'badge badge-blue',selesai:'badge badge-green'};
+const statusColors={pending:'#D97706',diproses:'#2563EB',selesai:'#059669'};
+
+const grid=document.getElementById('complaint-grid');
+SK.complaints.forEach(c=>{
+  const t=SK.getTenantById(c.tenantId);
+  const icon=catIcon[c.category]||catIcon.Lainnya;
+  grid.innerHTML+=`<div class="card p-5 cursor-pointer" onclick="openComplaint('${c.id}')" style="border-left:3px solid ${statusColors[c.status]}">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:36px;height:36px;border-radius:9px;background:#F1F5F9;display:flex;align-items:center;justify-content:center">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" style="color:#475569">${icon}</svg>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:14px;color:#0B1D2E">${c.title}</div>
+          <div style="font-size:12px;color:#94A3B8">${c.category} · ${c.room}</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+        <span class="${statusCls[c.status]}">${{pending:'Menunggu',diproses:'Diproses',selesai:'Selesai'}[c.status]}</span>
+        <span class="${priorityCls[c.priority]}">${{tinggi:'Mendesak',sedang:'Sedang',rendah:'Rendah'}[c.priority]}</span>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#475569;line-height:1.5;margin-bottom:12px">${c.desc}</p>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:12px;color:#94A3B8">Oleh: <strong style="color:#374151">${t?t.name:'—'}</strong> · ${new Date(c.date).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}</div>
+      ${c.status!=='selesai'?`<button onclick="event.stopPropagation();updateStatus('${c.id}')" style="padding:5px 12px;background:#2563EB;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer">${c.status==='pending'?'Proses →':'Tandai Selesai'}</button>`:'<span style="font-size:12px;color:#059669;font-weight:600">✓ Selesai</span>'}
+    </div>
+  </div>`;
+});
+
+function updateStatus(id){
+  const c=SK.complaints.find(x=>x.id===id);
+  if(c){
+    c.status=c.status==='pending'?'diproses':'selesai';
+    showToast('Status komplain diperbarui!','success');
+    grid.innerHTML='';
+    SK.complaints.forEach(c=>{
+      const t=SK.getTenantById(c.tenantId);const icon=catIcon[c.category]||catIcon.Lainnya;
+      grid.innerHTML+=`<div class="card p-5" style="border-left:3px solid ${statusColors[c.status]}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:9px;background:#F1F5F9;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" style="color:#475569">${icon}</svg></div><div><div style="font-weight:700;font-size:14px;color:#0B1D2E">${c.title}</div><div style="font-size:12px;color:#94A3B8">${c.category} · ${c.room}</div></div></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px"><span class="${statusCls[c.status]}">${{pending:'Menunggu',diproses:'Diproses',selesai:'Selesai'}[c.status]}</span><span class="${priorityCls[c.priority]}">${{tinggi:'Mendesak',sedang:'Sedang',rendah:'Rendah'}[c.priority]}</span></div>
+        </div>
+        <p style="font-size:13px;color:#475569;line-height:1.5;margin-bottom:12px">${c.desc}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;color:#94A3B8">Oleh: <strong style="color:#374151">${t?t.name:'—'}</strong> · ${new Date(c.date).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}</div>${c.status!=='selesai'?`<button onclick="updateStatus('${c.id}')" style="padding:5px 12px;background:#2563EB;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer">${c.status==='pending'?'Proses →':'Tandai Selesai'}</button>`:'<span style="font-size:12px;color:#059669;font-weight:600">✓ Selesai</span>'}</div>
+      </div>`;
+    });
+  }
+}
+function openComplaint(id){showToast('Membuka detail komplain...','info')}
+</script>
+</body>
+</html>

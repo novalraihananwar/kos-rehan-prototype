@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Settings — SmartKos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+.wa-preview{background:#E8F5E9;border-radius:12px;padding:16px;font-size:13px;line-height:1.6;color:#1B5E20;font-family:'Plus Jakarta Sans',sans-serif;white-space:pre-line;position:relative}
+.wa-preview::before{content:'WhatsApp Preview';position:absolute;top:-10px;left:12px;background:#25D366;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.template-card{border:2px solid #E2E8F0;border-radius:12px;padding:20px;cursor:pointer;transition:all .2s}
+.template-card:hover,.template-card.active{border-color:#2563EB;background:#EFF6FF}
+.var-chip{display:inline-flex;align-items:center;gap:3px;background:#DBEAFE;color:#1E40AF;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:all .2s;margin:2px}
+.var-chip:hover{background:#BFDBFE}
+.schedule-row{display:flex;align-items:center;justify-content:space-between;padding:14px;border:1.5px solid #E2E8F0;border-radius:10px;transition:all .2s}
+.schedule-row.active{border-color:#059669;background:#ECFDF5}
+.toggle{width:44px;height:24px;background:#E2E8F0;border-radius:12px;position:relative;cursor:pointer;transition:background .2s}
+.toggle.on{background:#059669}
+.toggle-dot{width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle.on .toggle-dot{transform:translateX(20px)}
+</style>
+</head>
+<body>
+<div class="app-layout">
+<aside class="app-sidebar" id="app-sidebar">
+  <div class="sidebar-brand"><div class="sidebar-brand-logo"><div class="sidebar-logo-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2.5"/><polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2.5"/></svg></div><div><div class="sidebar-brand-name">SmartKos</div><div class="sidebar-prop-name">Kos Harmoni Residence</div></div></div></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section"><div class="sidebar-section-label">Menu Utama</div>
+      <a href="dashboard.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>Dashboard</a>
+      <a href="rooms.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/></svg>Kamar</a>
+      <a href="tenants.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>Penghuni</a>
+      <a href="payments.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/></svg>Pembayaran</a>
+      <a href="complaints.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="currentColor" stroke-width="2"/></svg>Komplain</a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Keuangan</div>
+      <a href="reports.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Laporan</a>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Pengaturan</div>
+      <a href="wa-settings.html" class="sidebar-link active"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="2"/></svg>WhatsApp</a>
+      <a href="booking.html" class="sidebar-link"><svg class="icon" fill="none" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2"/></svg>Booking Online</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer"><div class="sidebar-user"><div class="sidebar-avatar">HK</div><div class="sidebar-user-info"><div class="sidebar-user-name">Hendra Kusuma</div><div class="sidebar-user-role">Owner</div></div></div></div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="app-main">
+<header class="app-topbar">
+  <button id="sidebar-toggle" class="btn btn-ghost btn-icon md:hidden"><svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <div class="flex-1"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#0B1D2E">Pengaturan WhatsApp</div><div style="font-size:12px;color:#94A3B8">Template & jadwal reminder otomatis</div></div>
+  <div style="width:34px;height:34px;border-radius:50%;background:#0B1D2E;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700">HK</div>
+</header>
+
+<div class="app-content">
+  <div class="page-header">
+    <div><div class="page-title">Template & Jadwal WhatsApp</div><div class="page-sub">Kelola pesan reminder dan jadwal pengiriman otomatis</div></div>
+    <button class="btn btn-success btn-sm" onclick="showToast('Kirim blast WA ke 28 penghuni?','warning');setTimeout(()=>showToast('28 pesan terkirim!','success'),2000)">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="white" stroke-width="2"/></svg>
+      Blast Reminder Sekarang
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#DCFCE7;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#22C55E" stroke-width="2"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Terkirim Bulan Ini</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#059669">84</div></div></div>
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#DBEAFE;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#2563EB" stroke-width="2"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Tingkat Baca</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#2563EB">94%</div></div></div>
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#FEF3C7;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#D97706" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="#D97706" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="#D97706" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="#D97706" stroke-width="2"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Jadwal Aktif</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#D97706">4</div></div></div>
+    <div class="card p-4 flex items-center gap-3"><div style="width:36px;height:36px;border-radius:9px;background:#F5F3FF;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.91 14a16 16 0 006.09 6.09l.63-.63a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#7C3AED" stroke-width="2"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase">Respon Bayar</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#7C3AED">78%</div></div></div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+    <!-- Left: Template Editor -->
+    <div>
+      <div class="card p-5 mb-5">
+        <div style="font-size:15px;font-weight:700;color:#0B1D2E;margin-bottom:4px">Template Aktif</div>
+        <div style="font-size:12px;color:#94A3B8;margin-bottom:16px">Pilih & edit template reminder pembayaran</div>
+
+        <div class="grid grid-cols-2 gap-2 mb-5">
+          <div class="template-card active" onclick="selectTemplate('h7')">
+            <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:4px">📅 H-7</div>
+            <div style="font-size:12px;color:#475569">Reminder 7 hari sebelum jatuh tempo</div>
+          </div>
+          <div class="template-card" onclick="selectTemplate('h3')">
+            <div style="font-size:12px;font-weight:700;color:#D97706;margin-bottom:4px">⏰ H-3</div>
+            <div style="font-size:12px;color:#475569">Reminder 3 hari sebelum jatuh tempo</div>
+          </div>
+          <div class="template-card" onclick="selectTemplate('h0')">
+            <div style="font-size:12px;font-weight:700;color:#2563EB;margin-bottom:4px">🔔 Hari-H</div>
+            <div style="font-size:12px;color:#475569">Reminder di hari jatuh tempo</div>
+          </div>
+          <div class="template-card" onclick="selectTemplate('late')">
+            <div style="font-size:12px;font-weight:700;color:#DC2626;margin-bottom:4px">🚨 Terlambat</div>
+            <div style="font-size:12px;color:#475569">Pesan keterlambatan pembayaran</div>
+          </div>
+        </div>
+
+        <!-- Variables help -->
+        <div style="margin-bottom:12px">
+          <div style="font-size:12px;font-weight:600;color:#64748B;margin-bottom:6px">Variabel tersedia (klik untuk sisipkan):</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px">
+            <span class="var-chip" onclick="insertVar('{{nama_penghuni}}')">{nama_penghuni}</span>
+            <span class="var-chip" onclick="insertVar('{{no_kamar}}')">{no_kamar}</span>
+            <span class="var-chip" onclick="insertVar('{{nominal}}')">{nominal}</span>
+            <span class="var-chip" onclick="insertVar('{{tgl_jatuh_tempo}}')">{tgl_jatuh_tempo}</span>
+            <span class="var-chip" onclick="insertVar('{{nama_kos}}')">{nama_kos}</span>
+            <span class="var-chip" onclick="insertVar('{{link_bayar}}')">{link_bayar}</span>
+          </div>
+        </div>
+
+        <label class="form-label">Isi Pesan Template</label>
+        <textarea id="template-editor" class="form-input" rows="8" onInput="updatePreview()" style="resize:vertical;font-size:13px;line-height:1.6"></textarea>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button class="btn btn-primary btn-sm flex-1" onclick="saveTemplate()">Simpan Template</button>
+          <button class="btn btn-outline btn-sm" onclick="resetTemplate()">Reset Default</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Preview + Schedule -->
+    <div>
+      <!-- Live Preview -->
+      <div class="card p-5 mb-5">
+        <div style="font-size:15px;font-weight:700;color:#0B1D2E;margin-bottom:14px">Preview Pesan</div>
+        <div class="wa-preview" id="wa-preview-box">Loading...</div>
+        <div style="margin-top:12px;padding:10px 12px;background:#F8FAFC;border-radius:8px;font-size:12px;color:#64748B">
+          <span class="font-semibold" style="color:#374151">Contoh data:</span> Budi Santoso · K-101 · Rp 750.000 · 15 November 2025
+        </div>
+      </div>
+
+      <!-- Schedule Settings -->
+      <div class="card p-5">
+        <div style="font-size:15px;font-weight:700;color:#0B1D2E;margin-bottom:14px">Jadwal Pengiriman Otomatis</div>
+        <div style="display:flex;flex-direction:column;gap:10px" id="schedule-list">
+          <div class="schedule-row active" id="sched-h7">
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#0B1D2E">H-7 Jatuh Tempo</div>
+              <div style="font-size:12px;color:#94A3B8">Setiap hari pukul 08:00</div>
+            </div>
+            <div class="toggle on" onclick="toggleSchedule('h7',this)"><div class="toggle-dot"></div></div>
+          </div>
+          <div class="schedule-row active" id="sched-h3">
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#0B1D2E">H-3 Jatuh Tempo</div>
+              <div style="font-size:12px;color:#94A3B8">Setiap hari pukul 08:00</div>
+            </div>
+            <div class="toggle on" onclick="toggleSchedule('h3',this)"><div class="toggle-dot"></div></div>
+          </div>
+          <div class="schedule-row active" id="sched-h0">
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#0B1D2E">Hari-H Jatuh Tempo</div>
+              <div style="font-size:12px;color:#94A3B8">Setiap hari pukul 07:00</div>
+            </div>
+            <div class="toggle on" onclick="toggleSchedule('h0',this)"><div class="toggle-dot"></div></div>
+          </div>
+          <div class="schedule-row active" id="sched-late">
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#0B1D2E">Keterlambatan Bayar</div>
+              <div style="font-size:12px;color:#94A3B8">H+1, H+3, H+7 setelah jatuh tempo</div>
+            </div>
+            <div class="toggle on" onclick="toggleSchedule('late',this)"><div class="toggle-dot"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const templates = {
+  h7: `Halo *{{nama_penghuni}}* 👋
+
+Kami dari *{{nama_kos}}* ingin mengingatkan bahwa tagihan sewa kamar Anda akan jatuh tempo dalam *7 hari lagi*.
+
+📋 *Detail Tagihan:*
+• Kamar: {{no_kamar}}
+• Nominal: *{{nominal}}*
+• Jatuh Tempo: {{tgl_jatuh_tempo}}
+
+💳 *Pembayaran via:*
+• Transfer Bank BCA/Mandiri/BNI
+• QRIS (scan di app pembayaran)
+• Link Bayar: {{link_bayar}}
+
+Terima kasih atas kepercayaan Anda! 🙏`,
+  h3: `Halo *{{nama_penghuni}}* ⏰
+
+Pengingat: Tagihan sewa Anda jatuh tempo *3 hari lagi*.
+
+📋 *Detail Tagihan:*
+• Kamar: {{no_kamar}}
+• Nominal: *{{nominal}}*
+• Jatuh Tempo: {{tgl_jatuh_tempo}}
+
+Segera lakukan pembayaran untuk menghindari denda keterlambatan.
+
+💳 Bayar sekarang: {{link_bayar}}
+
+Terima kasih! 🏠 _{{nama_kos}}_`,
+  h0: `🔔 *Reminder Pembayaran Hari Ini*
+
+Halo *{{nama_penghuni}}*,
+
+Hari ini adalah batas akhir pembayaran sewa Anda.
+
+📋 Kamar *{{no_kamar}}* | Nominal: *{{nominal}}*
+
+Mohon segera lakukan pembayaran hari ini untuk menghindari biaya keterlambatan.
+
+💳 Bayar: {{link_bayar}}
+
+Hubungi kami jika ada pertanyaan. 🙏`,
+  late: `⚠️ *Pemberitahuan Keterlambatan*
+
+Halo *{{nama_penghuni}}*,
+
+Kami memberitahukan bahwa pembayaran sewa kamar *{{no_kamar}}* Anda telah MELEWATI jatuh tempo *{{tgl_jatuh_tempo}}*.
+
+💰 Nominal: *{{nominal}}*
+
+Mohon segera lakukan pembayaran untuk menghindari pengenaan denda. Hubungi admin jika ada kendala.
+
+📞 Admin: 0812-3456-7890
+💳 Bayar: {{link_bayar}}
+
+_{{nama_kos}}_`
+};
+
+let currentTemplate = 'h7';
+
+function selectTemplate(t) {
+  currentTemplate = t;
+  document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('template-editor').value = templates[t];
+  updatePreview();
+}
+
+function insertVar(v) {
+  const ta = document.getElementById('template-editor');
+  const pos = ta.selectionStart;
+  ta.value = ta.value.slice(0, pos) + v + ta.value.slice(pos);
+  ta.focus();
+  updatePreview();
+}
+
+function updatePreview() {
+  const text = document.getElementById('template-editor').value;
+  const preview = text
+    .replace(/\{\{nama_penghuni\}\}/g, 'Budi Santoso')
+    .replace(/\{\{no_kamar\}\}/g, 'K-101')
+    .replace(/\{\{nominal\}\}/g, 'Rp 750.000')
+    .replace(/\{\{tgl_jatuh_tempo\}\}/g, '15 November 2025')
+    .replace(/\{\{nama_kos\}\}/g, 'Kos Harmoni Residence')
+    .replace(/\{\{link_bayar\}\}/g, 'https://bayar.smartkos.id/inv-001')
+    .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+    .replace(/_(.*?)_/g, '<em>$1</em>');
+  document.getElementById('wa-preview-box').innerHTML = preview.replace(/\n/g, '<br>');
+}
+
+function saveTemplate() {
+  templates[currentTemplate] = document.getElementById('template-editor').value;
+  showToast('Template berhasil disimpan!', 'success');
+}
+
+function resetTemplate() {
+  const defaults = {
+    h7: templates.h7, h3: templates.h3, h0: templates.h0, late: templates.late
+  };
+  document.getElementById('template-editor').value = defaults[currentTemplate];
+  updatePreview();
+  showToast('Template direset ke default', 'info');
+}
+
+function toggleSchedule(id, el) {
+  el.classList.toggle('on');
+  const row = el.closest('.schedule-row');
+  row.classList.toggle('active');
+  const isOn = el.classList.contains('on');
+  showToast(`Jadwal ${id.toUpperCase()} ${isOn ? 'diaktifkan' : 'dinonaktifkan'}`, isOn ? 'success' : 'warning');
+}
+
+// Init
+document.getElementById('template-editor').value = templates.h7;
+updatePreview();
+</script>
+</body>
+</html>

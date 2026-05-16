@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx skills *)",
+      "Skill(impeccable)",
+      "Bash(node *)"
+    ]
+  }
+}

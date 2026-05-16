@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Kamar — Kos Harmoni Residence</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--navy:#0B1D2E;--blue:#2563EB;--emerald:#059669}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#F8FAFC;color:#1E293B}
+.fd{font-family:'Syne',sans-serif}
+.navbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid #E2E8F0}
+.room-card{background:#fff;border:2px solid #E2E8F0;border-radius:16px;overflow:hidden;cursor:pointer;transition:all .2s}
+.room-card:hover,.room-card.selected{border-color:#2563EB;transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,99,235,.15)}
+.room-card.unavailable{opacity:.5;cursor:not-allowed;pointer-events:none}
+.badge-status{display:inline-flex;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
+.bs-green{background:#D1FAE5;color:#065F46}
+.bs-gray{background:#F1F5F9;color:#475569}
+.bs-amber{background:#FEF3C7;color:#92400E}
+.facil-tag{background:#F1F5F9;color:#475569;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:500}
+.inp{width:100%;padding:11px 14px;background:#fff;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .2s}
+.inp:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.btn-p{background:#2563EB;color:#fff;padding:13px 24px;border-radius:10px;font-weight:700;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-p:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,.4)}
+.step-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.step-active .step-circle{background:#2563EB;color:#fff}
+.step-done .step-circle{background:#059669;color:#fff}
+.step-inactive .step-circle{background:#E2E8F0;color:#94A3B8}
+@keyframes fiu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fiu .4s ease forwards}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#2563EB">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="white" stroke-width="2.5"/><polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2.5"/></svg>
+      </div>
+      <div>
+        <div class="fd font-bold text-base" style="color:#0B1D2E;line-height:1.1">Kos Harmoni Residence</div>
+        <div style="font-size:11px;color:#94A3B8">Jl. Cempaka Putih Timur No. 45, Jakarta Pusat</div>
+      </div>
+    </a>
+    <div class="flex items-center gap-3">
+      <a href="login.html" class="text-sm font-semibold" style="color:#2563EB">Sudah penghuni? Masuk →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="max-w-5xl mx-auto px-5 py-10">
+  <!-- Header -->
+  <div class="text-center mb-10 anim">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4" style="background:#EFF6FF;color:#2563EB">
+      <span class="w-2 h-2 rounded-full bg-emerald-500" style="animation:pulse 1.5s infinite"></span>
+      7 kamar tersedia sekarang
+    </div>
+    <h1 class="fd font-extrabold text-4xl md:text-5xl mb-3" style="color:#0B1D2E">Booking Kamar Online</h1>
+    <p class="text-gray-500 text-lg">Pilih kamar, isi data, dan konfirmasi booking. Mudah & cepat.</p>
+  </div>
+
+  <!-- Step indicator -->
+  <div class="flex items-center justify-center gap-4 mb-10 anim" style="animation-delay:.1s">
+    <div class="flex items-center gap-3 step-active" id="step1-indicator">
+      <div class="step-circle">1</div>
+      <span class="font-semibold text-sm" style="color:#0B1D2E">Pilih Kamar</span>
+    </div>
+    <div class="h-px flex-1 max-w-16" style="background:#E2E8F0"></div>
+    <div class="flex items-center gap-3 step-inactive" id="step2-indicator">
+      <div class="step-circle">2</div>
+      <span class="font-semibold text-sm" style="color:#94A3B8">Data Diri</span>
+    </div>
+    <div class="h-px flex-1 max-w-16" style="background:#E2E8F0"></div>
+    <div class="flex items-center gap-3 step-inactive" id="step3-indicator">
+      <div class="step-circle">3</div>
+      <span class="font-semibold text-sm" style="color:#94A3B8">Konfirmasi</span>
+    </div>
+  </div>
+
+  <!-- STEP 1: Room Selection -->
+  <div id="step1" class="anim" style="animation-delay:.2s">
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <div style="position:relative;flex:1;min-width:200px">
+        <svg style="position:absolute;left:11px;top:50%;transform:translateY(-50%)" width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke="#94A3B8" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/></svg>
+        <input class="inp" style="padding-left:34px" placeholder="Cari kamar berdasarkan tipe atau harga..." id="booking-search" oninput="filterBookingRooms()">
+      </div>
+      <select class="inp" id="booking-type" style="width:auto;flex:0 0 auto;min-width:140px" onchange="filterBookingRooms()">
+        <option value="">Semua Tipe</option>
+        <option value="Standard">Standard</option>
+        <option value="Deluxe">Deluxe</option>
+        <option value="Premium">Premium</option>
+        <option value="Suite">Suite</option>
+      </select>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="booking-room-grid"></div>
+  </div>
+
+  <!-- STEP 2: Form -->
+  <div id="step2" class="hidden" style="max-width:600px;margin:0 auto">
+    <div style="background:#fff;border-radius:20px;padding:32px;border:1px solid #E2E8F0;margin-bottom:20px">
+      <div id="selected-room-preview" style="background:#EFF6FF;border-radius:12px;padding:16px;margin-bottom:24px;border:1px solid #BFDBFE"></div>
+      <h3 class="fd font-bold text-xl mb-5" style="color:#0B1D2E">Lengkapi Data Diri</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="grid-column:span 2"><label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px">Nama Lengkap *</label><input class="inp" id="b-name" placeholder="Sesuai KTP"></div>
+        <div><label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px">No. WhatsApp *</label><input class="inp" id="b-phone" type="tel" placeholder="0812xxxxxxxx"></div>
+        <div><label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px">Email</label><input class="inp" id="b-email" type="email" placeholder="email@kamu.com"></div>
+        <div><label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px">Tanggal Mulai Masuk *</label><input class="inp" id="b-date" type="date"></div>
+        <div><label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px">Durasi Sewa *</label>
+          <select class="inp" id="b-duration">
+            <option value="1">1 Bulan</option>
+            <option value="3">3 Bulan</option>
+            <option value="6" selected>6 Bulan</option>
+            <option value="12">12 Bulan</option>
+          </select>
+        </div>
+        <div style="grid-column:span 2"><label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px">Pekerjaan / Status</label><input class="inp" id="b-job" placeholder="Mahasiswa, Karyawan, dsb."></div>
+        <div style="grid-column:span 2"><label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px">Catatan Tambahan</label><textarea class="inp" id="b-note" rows="3" placeholder="Ada pertanyaan atau permintaan khusus?"></textarea></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button onclick="goStep(1)" style="flex:0 0 auto;padding:13px 20px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;font-weight:600;background:#fff;cursor:pointer;font-family:inherit;color:#475569">← Kembali</button>
+      <button class="btn-p" style="flex:1;justify-content:center" onclick="goStep(3)">Lanjut Konfirmasi →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Confirmation -->
+  <div id="step3" class="hidden" style="max-width:560px;margin:0 auto">
+    <div style="background:#fff;border-radius:20px;padding:32px;border:1px solid #E2E8F0;margin-bottom:20px">
+      <h3 class="fd font-bold text-xl mb-5" style="color:#0B1D2E">Konfirmasi Booking</h3>
+      <div id="confirm-summary" style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px"></div>
+      <div style="background:#EFF6FF;border-radius:12px;padding:14px;font-size:13px;color:#1E40AF;margin-bottom:20px">
+        ℹ️ Booking akan dikonfirmasi admin dalam 1x24 jam. Admin akan menghubungi kamu via WhatsApp.
+      </div>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-bottom:20px">
+        <input type="checkbox" id="b-agree" style="margin-top:2px;flex-shrink:0">
+        <span style="font-size:13px;color:#475569">Saya menyetujui syarat & ketentuan sewa dan bersedia dihubungi admin untuk konfirmasi booking.</span>
+      </label>
+      <div style="display:flex;gap:10px">
+        <button onclick="goStep(2)" style="flex:0 0 auto;padding:13px 20px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;font-weight:600;background:#fff;cursor:pointer;font-family:inherit;color:#475569">← Edit Data</button>
+        <button class="btn-p" style="flex:1;justify-content:center;background:#059669" onclick="submitBooking()">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="white" stroke-width="2"/></svg>
+          Konfirmasi Booking
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Screen -->
+  <div id="step-success" class="hidden text-center" style="max-width:480px;margin:0 auto;padding:40px">
+    <div style="width:80px;height:80px;background:#D1FAE5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+      <svg width="36" height="36" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#059669" stroke-width="2.5"/></svg>
+    </div>
+    <h2 class="fd font-extrabold text-3xl mb-3" style="color:#0B1D2E">Booking Berhasil! 🎉</h2>
+    <p class="text-gray-500 mb-2">Nomor Booking: <strong id="booking-number" style="color:#2563EB;font-family:'JetBrains Mono',monospace"></strong></p>
+    <p class="text-gray-500 text-sm mb-8">Admin akan menghubungi kamu via WhatsApp dalam 1x24 jam untuk konfirmasi dan panduan pembayaran.</p>
+    <div style="background:#F0FDF4;border-radius:12px;padding:16px;margin-bottom:24px;text-align:left">
+      <div id="success-detail" style="font-size:13px;color:#374151;display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+    <a href="login.html" class="btn-p" style="display:inline-flex;text-decoration:none">Masuk ke Portal Penghuni →</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<div style="background:#0B1D2E;padding:24px 20px;text-align:center;margin-top:48px">
+  <p style="color:#94A3B8;font-size:13px">Kos Harmoni Residence · Jl. Cempaka Putih Timur No. 45, Jakarta Pusat</p>
+  <p style="color:#64748B;font-size:12px;margin-top:4px">📱 0812-3456-7890 · ✉️ admin@harmoniresidence.co.id · Powered by SmartKos</p>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script>
+let selectedRoom = null;
+
+function filterBookingRooms() {
+  const q = document.getElementById('booking-search').value.toLowerCase();
+  const type = document.getElementById('booking-type').value;
+  const available = SK.rooms.filter(r => r.status === 'kosong' || r.status === 'booking');
+  let filtered = SK.rooms;
+  if (q) filtered = filtered.filter(r => r.id.toLowerCase().includes(q) || r.type.toLowerCase().includes(q));
+  if (type) filtered = filtered.filter(r => r.type === type);
+  renderBookingRooms(filtered);
+}
+
+function renderBookingRooms(rooms) {
+  const grid = document.getElementById('booking-room-grid');
+  const availableIds = new Set(SK.rooms.filter(r => r.status === 'kosong').map(r => r.id));
+  grid.innerHTML = rooms.map(r => {
+    const isAvailable = availableIds.has(r.id);
+    const isSelected = selectedRoom && selectedRoom.id === r.id;
+    return `<div class="room-card ${!isAvailable?'unavailable':''} ${isSelected?'selected':''}" onclick="selectBookingRoom('${r.id}')">
+      <div style="height:120px;background:linear-gradient(135deg,${r.type==='Suite'?'#0B1D2E,#1A3552':r.type==='Premium'?'#1A3552,#244566':r.type==='Deluxe'?'#2563EB,#1D4ED8':'#334155,#475569'});display:flex;align-items:center;justify-content:center;position:relative">
+        <span class="fd font-extrabold text-4xl text-white">${r.id}</span>
+        <span style="position:absolute;top:10px;right:10px" class="badge-status ${isAvailable?'bs-green':r.status==='booking'?'bs-amber':'bs-gray'}">${isAvailable?'Tersedia':r.status==='booking'?'Booking':'Terisi'}</span>
+        ${isSelected?'<div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:#059669;border-radius:50%;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5"/></svg></div>':''}
+      </div>
+      <div style="padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D2E">${r.type}</div><div style="font-size:12px;color:#94A3B8">Lantai ${r.floor} · ${r.size}</div></div>
+          <div style="text-align:right"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:#2563EB">${SK.formatRupiah(r.price)}</div><div style="font-size:11px;color:#94A3B8">/bulan</div></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          ${r.facilities.slice(0,4).map(f=>`<span class="facil-tag">${f}</span>`).join('')}
+          ${r.facilities.length>4?`<span class="facil-tag">+${r.facilities.length-4}</span>`:''}
+        </div>
+        ${isAvailable?`<div style="margin-top:12px"><button style="width:100%;padding:9px;background:${isSelected?'#059669':'#2563EB'};color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit" onclick="event.stopPropagation();selectBookingRoom('${r.id}')">${isSelected?'✓ Dipilih — Lanjut Booking':'Pilih Kamar Ini'}</button></div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectBookingRoom(id) {
+  selectedRoom = SK.getRoomById(id);
+  if (!selectedRoom || selectedRoom.status !== 'kosong') return;
+  renderBookingRooms(SK.rooms);
+  setTimeout(() => goStep(2), 300);
+}
+
+function goStep(n) {
+  ['step1','step2','step3','step-success'].forEach((s,i) => {
+    const el = document.getElementById(s);
+    if (el) el.classList.toggle('hidden', i+1 !== n && !(n > 3 && s === 'step-success'));
+  });
+  // Update step indicators
+  ['step1-indicator','step2-indicator','step3-indicator'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    el.className = `flex items-center gap-3 ${i+1 < n ? 'step-done' : i+1 === n ? 'step-active' : 'step-inactive'}`;
+    const circle = el.querySelector('.step-circle');
+    const label = el.querySelector('span');
+    if (i+1 < n) { circle.style.cssText='background:#059669;color:#fff'; label.style.color='#059669'; }
+    else if (i+1 === n) { circle.style.cssText='background:#2563EB;color:#fff'; label.style.color='#0B1D2E'; }
+    else { circle.style.cssText='background:#E2E8F0;color:#94A3B8'; label.style.color='#94A3B8'; }
+  });
+  if (n === 2 && selectedRoom) {
+    document.getElementById('selected-room-preview').innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D2E">Kamar ${selectedRoom.id} — ${selectedRoom.type}</div><div style="font-size:12px;color:#64748B">Lantai ${selectedRoom.floor} · ${selectedRoom.size}</div></div>
+        <div style="text-align:right"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:#2563EB">${SK.formatRupiah(selectedRoom.price)}</div><div style="font-size:11px;color:#94A3B8">/bulan</div></div>
+      </div>`;
+  }
+  if (n === 3) {
+    const name = document.getElementById('b-name').value || '—';
+    const phone = document.getElementById('b-phone').value || '—';
+    const date = document.getElementById('b-date').value;
+    const duration = document.getElementById('b-duration').value;
+    const summary = document.getElementById('confirm-summary');
+    summary.innerHTML = [
+      ['Kamar', `${selectedRoom.id} — ${selectedRoom.type}`, '#2563EB'],
+      ['Nama', name, '#0B1D2E'],
+      ['No. WhatsApp', phone, '#0B1D2E'],
+      ['Tanggal Masuk', date ? new Date(date).toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'}) : '—', '#0B1D2E'],
+      ['Durasi', duration + ' bulan', '#0B1D2E'],
+      ['Harga/Bulan', SK.formatRupiah(selectedRoom.price), '#059669'],
+      ['Total Estimasi', SK.formatRupiah(selectedRoom.price * duration), '#2563EB'],
+    ].map(([k,v,c])=>`<div style="display:flex;justify-content:space-between;padding:8px 12px;background:#F8FAFC;border-radius:8px"><span style="font-size:13px;color:#64748B">${k}</span><span style="font-size:13px;font-weight:700;color:${c}">${v}</span></div>`).join('');
+  }
+}
+
+function submitBooking() {
+  if (!document.getElementById('b-agree').checked) {
+    alert('Mohon setujui syarat & ketentuan terlebih dahulu');
+    return;
+  }
+  const num = 'BK-' + Date.now().toString().slice(-6);
+  document.getElementById('booking-number').textContent = num;
+  const name = document.getElementById('b-name').value || 'Calon Penghuni';
+  document.getElementById('success-detail').innerHTML = [
+    ['Nomor Booking', num],
+    ['Kamar', selectedRoom.id + ' — ' + selectedRoom.type],
+    ['Nama', name],
+    ['WhatsApp', document.getElementById('b-phone').value || '—'],
+    ['Status', '⏳ Menunggu konfirmasi admin'],
+  ].map(([k,v])=>`<div style="display:flex;justify-content:space-between"><span style="color:#94A3B8">${k}</span><span style="font-weight:600;color:#0B1D2E">${v}</span></div>`).join('');
+  // Hide all steps, show success
+  ['step1','step2','step3'].forEach(s=>document.getElementById(s).classList.add('hidden'));
+  document.getElementById('step-success').classList.remove('hidden');
+}
+
+// Init
+filterBookingRooms();
+// Set min date for booking
+const dateInput = document.getElementById('b-date');
+if (dateInput) {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  dateInput.min = tomorrow.toISOString().split('T')[0];
+  dateInput.value = tomorrow.toISOString().split('T')[0];
+}
+</script>
+</body>
+</html>
