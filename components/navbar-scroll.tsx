@@ -3,6 +3,13 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 
+const NAV_LINKS = [
+  { label: "Fitur", href: "/#fitur" },
+  { label: "Harga", href: "/#harga" },
+  { label: "Demo", href: "/admin" },
+  { label: "Tentang", href: "/#tentang" },
+]
+
 export function NavbarScroll() {
   const [scrolled, setScrolled] = useState(false)
 
@@ -40,19 +47,17 @@ export function NavbarScroll() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
-          {(["Fitur", "Harga", "Demo", "Tentang"] as const).map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          {NAV_LINKS.map(({ label, href }) => (
+            <Link
+              key={label}
+              href={href}
               className={[
                 "text-sm font-medium transition-colors hover:text-[oklch(0.54_0.155_162)]",
-                scrolled
-                  ? "text-[oklch(0.35_0.025_240)]"
-                  : "text-white/80",
+                scrolled ? "text-[oklch(0.35_0.025_240)]" : "text-white/80",
               ].join(" ")}
             >
-              {item}
-            </a>
+              {label}
+            </Link>
           ))}
         </nav>
 
@@ -67,12 +72,12 @@ export function NavbarScroll() {
           >
             Masuk
           </Link>
-          <a
-            href="#daftar"
+          <Link
+            href="/login"
             className="inline-flex h-9 items-center justify-center rounded-lg bg-[oklch(0.54_0.155_162)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[oklch(0.48_0.145_162)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.54_0.155_162)] focus-visible:ring-offset-2"
           >
             Mulai Gratis
-          </a>
+          </Link>
         </div>
       </div>
     </header>

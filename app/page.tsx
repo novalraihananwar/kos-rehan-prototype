@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { NavbarScroll } from "@/components/navbar-scroll"
+import { PricingSection } from "@/components/pricing-section"
 
 // ─── tiny SVG helpers (inline, zero-dependency) ─────────────────────────────
 
@@ -298,76 +299,7 @@ function QRCardMockup() {
   )
 }
 
-// ─── Pricing ─────────────────────────────────────────────────────────────────
-
-type PricingTier = {
-  name: string
-  price: string
-  period: string
-  units: string
-  description: string
-  features: string[]
-  cta: string
-  featured: boolean
-}
-
-const pricingTiers: PricingTier[] = [
-  {
-    name: "Starter",
-    price: "Rp 299.000",
-    period: "/bulan",
-    units: "Hingga 50 unit",
-    description: "Untuk kompleks kecil yang baru mulai digitalisasi.",
-    features: [
-      "Manajemen hingga 50 unit",
-      "Portal penghuni (QR card)",
-      "Pembayaran & invoice otomatis",
-      "WhatsApp reminder dasar",
-      "Laporan bulanan",
-      "Support via email",
-    ],
-    cta: "Mulai Gratis 14 Hari",
-    featured: false,
-  },
-  {
-    name: "Pro",
-    price: "Rp 599.000",
-    period: "/bulan",
-    units: "Hingga 200 unit",
-    description: "Untuk apartemen skala menengah dengan kebutuhan lengkap.",
-    features: [
-      "Manajemen hingga 200 unit",
-      "Portal penghuni (QR card) + cetak batch",
-      "Smart payment + rekonsiliasi otomatis",
-      "WhatsApp blast & notifikasi custom",
-      "Sistem maintenance & work order",
-      "Laporan keuangan + ekspor Excel",
-      "Multi-admin dengan role",
-      "Priority support",
-    ],
-    cta: "Mulai Gratis 14 Hari",
-    featured: true,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    units: "Tidak terbatas",
-    description: "Untuk grup properti besar dengan kebutuhan spesifik.",
-    features: [
-      "Unit tidak terbatas",
-      "Onboarding & migrasi data",
-      "Custom domain & branding",
-      "API access & integrasi pihak ketiga",
-      "SLA 99,9% uptime",
-      "Dedicated account manager",
-      "Pelatihan tim on-site",
-      "Kontrak tahunan fleksibel",
-    ],
-    cta: "Hubungi Kami",
-    featured: false,
-  },
-]
+// Pricing moved to components/pricing-section.tsx (client component)
 
 // ─── Main Page ───────────────────────────────────────────────────────────────
 
@@ -409,20 +341,20 @@ export default function LandingPage() {
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href="#daftar"
+                  <Link
+                    href="/login"
                     className="inline-flex h-11 items-center gap-2 rounded-xl bg-[oklch(0.54_0.155_162)] px-6 text-sm font-semibold text-white transition-colors hover:bg-[oklch(0.48_0.145_162)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.54_0.155_162)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--slate-hero)]"
                   >
                     Coba Gratis 14 Hari
                     <IconArrowRight className="h-4 w-4" />
-                  </a>
-                  <a
-                    href="#demo"
+                  </Link>
+                  <Link
+                    href="/admin"
                     className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/20 px-6 text-sm font-semibold text-white/85 transition-colors hover:bg-white/8 hover:border-white/30 focus-visible:outline-none"
                   >
                     <IconScan className="h-4 w-4" />
                     Lihat Demo
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Stats row */}
@@ -770,13 +702,13 @@ export default function LandingPage() {
                 </div>
 
                 <div className="mt-10 flex flex-wrap gap-3">
-                  <a
-                    href="#daftar"
+                  <Link
+                    href="/login"
                     className="inline-flex h-10 items-center gap-2 rounded-xl bg-[oklch(0.54_0.155_162)] px-5 text-sm font-semibold text-white transition-colors hover:bg-[oklch(0.48_0.145_162)]"
                   >
                     Coba Fitur Ini
                     <IconArrowRight className="h-4 w-4" />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -822,113 +754,7 @@ export default function LandingPage() {
         </section>
 
         {/* ── 4. HARGA ─────────────────────────────────────────────── */}
-        <section id="harga" className="bg-white py-24">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <div className="mb-4">
-              <span className="inline-block rounded-full bg-[oklch(0.97_0.04_162)] px-3.5 py-1 text-xs font-semibold text-[oklch(0.48_0.145_162)] tracking-wide uppercase">
-                Harga
-              </span>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-4 items-end mb-12">
-              <h2
-                className="font-display font-bold text-[oklch(0.15_0.028_240)] leading-tight"
-                style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
-              >
-                Harga Transparan,<br />
-                <span className="text-[oklch(0.48_0.145_162)]">Tanpa Biaya Tersembunyi</span>
-              </h2>
-              <div className="lg:text-right">
-                {/* Annual toggle — static visual, no JS needed for landing */}
-                <div className="inline-flex items-center gap-3 rounded-full bg-[oklch(0.97_0.008_155)] p-1 border border-[oklch(0.9_0.012_155)]">
-                  <span className="rounded-full px-4 py-1.5 text-xs font-semibold text-[oklch(0.5_0.02_240)]">Bulanan</span>
-                  <span className="rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-[oklch(0.2_0.025_240)] shadow-sm">
-                    Tahunan <span className="text-[oklch(0.48_0.145_162)]">2 bln gratis</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-5">
-              {pricingTiers.map((tier) => (
-                <div
-                  key={tier.name}
-                  className={[
-                    "rounded-2xl p-7 flex flex-col",
-                    tier.featured
-                      ? "bg-[var(--slate-hero)] ring-2 ring-[oklch(0.54_0.155_162)] shadow-[0_8px_48px_oklch(0.54_0.155_162/0.2)] relative"
-                      : "bg-white border border-[oklch(0.9_0.012_155)]",
-                  ].join(" ")}
-                >
-                  {tier.featured && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="inline-block rounded-full bg-[oklch(0.54_0.155_162)] px-4 py-1 text-[11px] font-bold text-white tracking-wide shadow-lg">
-                        Paling Populer
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Tier header */}
-                  <div className="mb-6">
-                    <h3 className={`font-display font-bold text-lg mb-1 ${tier.featured ? "text-white" : "text-[oklch(0.15_0.028_240)]"}`}>
-                      {tier.name}
-                    </h3>
-                    <p className={`text-xs leading-relaxed ${tier.featured ? "text-white/55" : "text-[oklch(0.5_0.02_240)]"}`}>
-                      {tier.description}
-                    </p>
-                  </div>
-
-                  {/* Price */}
-                  <div className="mb-1">
-                    <span className={`font-display font-extrabold tabular-nums ${tier.featured ? "text-white" : "text-[oklch(0.15_0.028_240)]"}`} style={{ fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)" }}>
-                      {tier.price}
-                    </span>
-                    {tier.period && (
-                      <span className={`text-sm ml-1 ${tier.featured ? "text-white/50" : "text-[oklch(0.55_0.02_240)]"}`}>
-                        {tier.period}
-                      </span>
-                    )}
-                  </div>
-                  <div className={`text-xs mb-6 ${tier.featured ? "text-[oklch(0.66_0.14_162)]" : "text-[oklch(0.5_0.02_240)]"}`}>
-                    {tier.units}
-                  </div>
-
-                  {/* Feature list */}
-                  <ul className="space-y-2.5 mb-8 flex-1">
-                    {tier.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5">
-                        <IconCheck
-                          className={`h-3.5 w-3.5 mt-0.5 flex-shrink-0 ${tier.featured ? "text-[oklch(0.66_0.14_162)]" : "text-[oklch(0.54_0.155_162)]"}`}
-                        />
-                        <span className={`text-xs leading-relaxed ${tier.featured ? "text-white/70" : "text-[oklch(0.4_0.02_240)]"}`}>
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA */}
-                  <a
-                    href="#daftar"
-                    className={[
-                      "inline-flex h-10 items-center justify-center rounded-xl text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2",
-                      tier.featured
-                        ? "bg-[oklch(0.54_0.155_162)] text-white hover:bg-[oklch(0.48_0.145_162)] focus-visible:ring-[oklch(0.54_0.155_162)]"
-                        : "border border-[oklch(0.9_0.012_155)] text-[oklch(0.3_0.025_240)] hover:bg-[oklch(0.97_0.008_155)] focus-visible:ring-[oklch(0.54_0.155_162)]",
-                    ].join(" ")}
-                  >
-                    {tier.cta}
-                  </a>
-                </div>
-              ))}
-            </div>
-
-            {/* Trust note */}
-            <p className="mt-8 text-center text-xs text-[oklch(0.58_0.02_240)]">
-              Semua paket termasuk SSL, backup harian, dan update fitur tanpa biaya tambahan. Batalkan kapan saja.
-            </p>
-          </div>
-        </section>
+        <PricingSection />
 
         {/* ── 5. CTA SECTION ───────────────────────────────────────── */}
         <section
@@ -948,15 +774,17 @@ export default function LandingPage() {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="#daftar-form"
+              <Link
+                href="/login"
                 className="inline-flex h-12 items-center gap-2 rounded-xl bg-white px-7 text-sm font-semibold text-[oklch(0.54_0.155_162)] transition-colors hover:bg-white/90 shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[oklch(0.54_0.155_162)]"
               >
                 Mulai Gratis 14 Hari
                 <IconArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
               <a
-                href="#demo"
+                href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20jadwalkan%20demo%20SmartApt"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex h-12 items-center gap-2 rounded-xl border-2 border-white/50 px-7 text-sm font-semibold text-white transition-colors hover:bg-white/10 hover:border-white/70 focus-visible:outline-none"
               >
                 Jadwalkan Demo
