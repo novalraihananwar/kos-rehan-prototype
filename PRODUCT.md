@@ -2,37 +2,50 @@
 
 ## Register
 
-brand
+brand (landing page) / product (admin + tenant portal)
 
 ## Users
 
-Pemilik kos (Indonesian boarding house owners) with 1 to 100+ rooms, managing anywhere from a single property to multiple branches. Mostly non-technical: comfortable with WhatsApp and spreadsheets, ready to upgrade to a proper tool if it feels simple enough. Secondary audience: potential tenants who land on the booking page.
+**Primary — Property Manager / Owner:**
+Manages 1–5 apartment towers (50–500+ units). Uses a MacBook or Windows laptop at their office desk during business hours. Needs fast overview of occupancy, payments, and maintenance. Comfortable with modern software (Google Workspace, Notion) but not a developer. Expects the system to feel premium — like the apartments they manage.
 
-Context: owner reviews the landing page on mobile or laptop, comparing options, already frustrated with manual processes. First impression matters. They need to see the product working, not just described.
+**Secondary — Tenant:**
+Receives a physical QR card upon check-in. Scans it from a phone to access their portal. Does not want to memorize passwords. May be a young professional or family in a mid-to-premium apartment complex.
+
+**Tertiary — Staff (admin, receptionist):**
+Executes day-to-day tasks: updating unit status, processing payments, logging maintenance requests, managing visitors.
 
 ## Product Purpose
 
-SmartKos is an all-in-one SaaS platform that replaces the manual, error-prone kos management workflow (WhatsApp groups, spreadsheets, cash collection) with a modern digital system covering rooms, tenants, payments, automated WhatsApp reminders, and financial reports — all from one dashboard. Success looks like an owner who stops chasing rent manually within the first week.
+SmartApt is an all-in-one apartment management platform for large-scale residential complexes (200+ units). It replaces fragmented spreadsheets, WhatsApp chains, and paper-based processes with a unified digital system.
+
+Core loop: leases → payments → maintenance → reports — all from one dashboard.
+
+The QR card tenant portal is the flagship differentiator: tenants scan a physical card, land on their personal portal, and self-serve their billing, requests, and documents — no app install, no password required.
+
+Success looks like a property manager who reduces their daily admin time by 60% within the first month.
 
 ## Brand Personality
 
-Smart, Friendly, Trustworthy. Confident enough to lead, warm enough to not intimidate non-technical owners, and reliable enough that they trust their financial data to it.
+Precise, Capable, Residential. Confident enough to handle enterprise-scale complexity, refined enough to feel like the buildings it manages.
 
 ## Anti-references
 
-- Generic SaaS cream/white: Notion-style off-white everything, bland typography, no visual identity. SmartKos should have clear character.
-- Overcrowded dashboard-screenshot heroes: busy UI previews that obscure the value proposition.
-- Heavy corporate enterprise blue: stiff, dated, feels like SAP or old banking software.
-- Generic Indonesian e-commerce: Tokopedia/Shopee busy multi-color layouts not appropriate for a B2B management tool.
+- Heavy navy/gold real estate branding: looks like a 2010 property listing site.
+- Generic SaaS cream/white dashboard: Notion-style everything, no visual character.
+- Overcrowded data tables with no breathing room: overwhelming, not empowering.
+- Consumer app playfulness: emojis, rounded corners everywhere, candy colors — wrong register for a professional B2B tool.
+- Enterprise gray seriousness: SAP, Oracle aesthetics — too cold for a product people use daily.
 
 ## Design Principles
 
-1. **Show, don't describe.** Every claim should be backed by a visual. If we say "one dashboard," show the dashboard.
-2. **Earn trust through clarity.** Pricing visible, no hidden steps, copy that respects the user's intelligence.
-3. **Local but professional.** Indonesian context (Bahasa, QRIS, WhatsApp) wrapped in a modern SaaS feel — not generic Western SaaS, not local e-commerce.
-4. **One system, no seams.** Landing page and app should feel like the same product. Shared tokens, shared component logic, no jarring transitions.
-5. **Friendly authority.** The tone is warm and direct, never condescending or corporate.
+1. **Precision over decoration.** Every element earns its place. Data is primary; chrome is secondary.
+2. **Emerald as signal.** Green means go, paid, available, active. Use it with restraint — when it appears, it means something.
+3. **Space is a feature.** Generous whitespace reflects the premium nature of the product and the properties it manages.
+4. **Scannable at a glance.** A manager checking the dashboard at 9am should see what matters in 3 seconds.
+5. **QR-first tenant experience.** The tenant portal must work perfectly on mobile, one-handed, first-time, with zero onboarding.
+6. **Indonesian context, global standard.** Bahasa Indonesia UI, QRIS payment integration, WhatsApp automation — wrapped in a globally competitive product aesthetic.
 
 ## Accessibility & Inclusion
 
-WCAG AA minimum. Strong color contrast on all text. Mobile-first responsive (many kos owners primarily use phones). No reliance on color alone for meaning — always pair color with text or icon.
+WCAG AA minimum. Emerald accent must pass 4.5:1 contrast against white backgrounds. Mobile-first for tenant portal. Keyboard navigable for admin dashboard. No color-only meaning — always pair with icon or label.

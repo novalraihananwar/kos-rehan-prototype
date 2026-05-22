@@ -3,7 +3,21 @@
     "allow": [
       "Bash(npx skills *)",
       "Skill(impeccable)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npx create-next-app@latest smartapt --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npm install *)",
+      "Bash(npx shadcn@latest init --defaults -y)",
+      "Bash(npx shadcn@latest add card table badge input select tabs sheet dropdown-menu tooltip avatar progress separator dialog -y)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(Start-Process npm *)",
+      "Bash(Out-Null)",
+      "Bash(Start-Sleep -Seconds 5)",
+      "Bash(Invoke-WebRequest http://localhost:3000 -UseBasicParsing -TimeoutSec 5)",
+      "Bash(Select-Object -First 3)",
+      "PowerShell(Set-Location \"D:\\\\website building\\\\kos kosan rehan\\\\smartapt\"; Start-Process -FilePath \"npm\" -ArgumentList \"run\",\"dev\" -WindowStyle Hidden; Start-Sleep -Seconds 8; try { $r = Invoke-WebRequest http://localhost:3000 -UseBasicParsing -TimeoutSec 8; \"HTTP $\\($r.StatusCode\\) — dev server running\" } catch { \"Server not ready yet: $_\" })",
+      "Bash(git add *)"
     ]
   }
 }

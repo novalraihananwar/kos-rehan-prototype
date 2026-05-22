@@ -1,105 +1,170 @@
-# Design System — SmartKos
+# Design System — SmartApt
 
-## Color Palette
+## Color Strategy
 
-Primary brand colors. All on-brand usage should draw from these tokens only.
+**Dashboard/App (product register):** Restrained — emerald ≤10% of surface, tinted neutrals carry the rest.
+**Landing page (brand register):** Committed — emerald heroes anchor key moments.
 
-| Role | Name | Hex | Usage |
-|------|------|-----|-------|
-| Background dark | Navy 950 | `#050F19` | Footer, darkest surfaces |
-| Brand primary | Navy 900 | `#0B1D2E` | Hero bg, headings, dark sections |
-| Surface dark | Navy 700 | `#1A3552` | Sidebar hover, dark card variation |
-| Accent primary | Blue 600 | `#2563EB` | CTAs, active states, links |
-| Accent hover | Blue 700 | `#1D4ED8` | Button hover |
-| Accent light | Blue 50 | `#EFF6FF` | Icon backgrounds, chip bg |
-| Success | Emerald 600 | `#059669` | Paid status, positive indicators |
-| Success light | Emerald 50 | `#ECFDF5` | Success badge bg |
-| Warning | Amber 500 | `#F59E0B` | Booking/pending states |
-| Danger | Red 500 | `#EF4444` | Overdue, errors |
-| Body text | Gray 800 | `#1E293B` | Primary body copy |
-| Secondary text | Gray 500 | `#64748B` | Subtitles, captions |
-| Border | Gray 200 | `#E2E8F0` | Card borders, dividers |
-| Surface light | Gray 50 | `#F8FAFC` | Section alternating background |
+All colors in OKLCH. Never use raw `#000` or `#fff`.
 
-**Off-palette colors to avoid:** purple (`#7C3AED`), orange (`#EA580C`) — these break brand cohesion.
+## Color Tokens
+
+| Token | OKLCH | Hex approx | Usage |
+|-------|-------|------------|-------|
+| `--bg` | oklch(0.985 0.006 155) | `#F7FAF8` | Page background (emerald-tinted white) |
+| `--surface` | oklch(0.975 0.008 155) | `#EEF4F0` | Card, panel surfaces |
+| `--surface-raised` | oklch(1 0 0) | `#FFFFFF` | Elevated cards, modals |
+| `--border` | oklch(0.9 0.012 155) | `#D4E5D9` | Borders, dividers |
+| `--border-strong` | oklch(0.82 0.018 155) | `#B0CCB8` | Focus rings, strong dividers |
+| `--text-primary` | oklch(0.2 0.025 240) | `#0F1F2E` | Body text, headings |
+| `--text-secondary` | oklch(0.48 0.022 240) | `#4A6070` | Labels, captions, secondary info |
+| `--text-tertiary` | oklch(0.65 0.015 240) | `#7A95A5` | Placeholder, disabled |
+| `--emerald` | oklch(0.54 0.155 162) | `#059669` | Primary CTA, active states, paid |
+| `--emerald-hover` | oklch(0.48 0.145 162) | `#047857` | Button hover |
+| `--emerald-light` | oklch(0.97 0.04 162) | `#ECFDF5` | Badge bg, tinted surfaces |
+| `--emerald-mid` | oklch(0.78 0.1 162) | `#6EE7B7` | Charts, progress bars |
+| `--amber` | oklch(0.72 0.16 75) | `#F59E0B` | Pending, warning |
+| `--amber-light` | oklch(0.98 0.03 85) | `#FFFBEB` | Warning badge bg |
+| `--red` | oklch(0.62 0.19 25) | `#EF4444` | Overdue, error, danger |
+| `--red-light` | oklch(0.97 0.03 25) | `#FEF2F2` | Error badge bg |
+| `--slate-hero` | oklch(0.15 0.028 240) | `#0B1929` | Landing hero bg |
+| `--slate-dark` | oklch(0.22 0.032 240) | `#132333` | Dark sections |
 
 ## Typography
 
-| Role | Font | Weight | Size |
-|------|------|--------|------|
-| Display / Headings | Syne | 700–800 | `text-4xl`–`text-7xl` |
-| Body | Plus Jakarta Sans | 400–700 | `text-sm`–`text-lg` |
-| Monospace / Numbers | JetBrains Mono | 400–500 | `text-xs`–`text-sm` |
+**Scene test passed:** "Property manager glancing at a dashboard at 9am — needs data clarity, not typographic drama."
 
-Font loading: all three via Google Fonts. Class shortcuts: `.fd` = Syne display.
+### Font Stack
 
-## Spacing Scale
+| Role | Font | Weights | Notes |
+|------|------|---------|-------|
+| Display / Hero | Bricolage Grotesque | 400–800 | Structural, architectural — not on reject list |
+| Body / UI | Manrope | 400–700 | Humanist sans, warm precision — not on reject list |
+| Numbers / Mono | Geist Mono | 400–500 | Clean numeric tabular figures |
 
-Section vertical rhythm: `py-24` (96px) consistently. Stats dark section: same `py-24`.  
-Card padding: `28px` (feature, testimonial). Pricing card: `32px`.  
-Content max-width: `max-w-7xl` (1280px) with `px-5` gutters.
+Load via Google Fonts (Bricolage Grotesque + Manrope) + Vercel CDN (Geist Mono).
+
+```css
+/* Tailwind config */
+fontFamily: {
+  display: ['Bricolage Grotesque', 'sans-serif'],
+  body: ['Manrope', 'sans-serif'],
+  mono: ['Geist Mono', 'monospace'],
+}
+```
+
+### Type Scale (fluid with clamp)
+
+| Role | Size | Weight | Line height |
+|------|------|--------|-------------|
+| `hero` | clamp(2.5rem, 5vw, 4.5rem) | 800 | 1.1 |
+| `h1` | clamp(1.75rem, 3vw, 2.5rem) | 700 | 1.2 |
+| `h2` | clamp(1.375rem, 2vw, 1.875rem) | 700 | 1.25 |
+| `h3` | 1.25rem | 600 | 1.3 |
+| `h4` | 1.0625rem | 600 | 1.35 |
+| `body` | 0.9375rem | 400 | 1.6 |
+| `body-sm` | 0.875rem | 400 | 1.55 |
+| `label` | 0.75rem | 600 | 1.4 |
+| `mono` | 0.875rem | 400–500 | 1.5 |
+
+## Spacing & Layout
+
+- Base unit: 4px
+- Content max-width: 1280px (`max-w-7xl`) with 24px gutters on desktop, 16px on mobile
+- Section rhythm: 96px vertical (`py-24`) on landing; 24px page padding on app
+- Card padding: 24px standard, 32px for featured/primary cards
+- Sidebar width: 256px fixed
+- Topbar height: 60px fixed
 
 ## Border Radius
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--r-sm` | 6px | Small elements |
-| `--r` | 8px | Default |
-| `--r-md` | 12px | Buttons, inputs |
-| `--r-lg` | 16px | Cards (feature, testimonial) |
-| `--r-xl` | 20px | Pricing cards |
-| `--r-2xl` | 24px | Large containers |
-| `--r-full` | 9999px | Chips, badges, pills |
+| `rounded-sm` | 6px | Tags, small elements |
+| `rounded` | 8px | Inputs, small cards |
+| `rounded-md` | 10px | Buttons |
+| `rounded-lg` | 14px | Cards, panels |
+| `rounded-xl` | 18px | Large cards, modals |
+| `rounded-2xl` | 24px | Feature cards, hero elements |
+| `rounded-full` | 9999px | Badges, avatars, pills |
 
-## Buttons (Landing Page)
+## Elevation / Shadow
 
-Two variants used on landing page. Both `border-radius: 12px`, `font-size: 14px`, `font-weight: 700`.
+```css
+--shadow-sm: 0 1px 2px oklch(0.2 0.025 240 / 0.06), 0 1px 3px oklch(0.2 0.025 240 / 0.08);
+--shadow: 0 2px 4px oklch(0.2 0.025 240 / 0.06), 0 4px 12px oklch(0.2 0.025 240 / 0.08);
+--shadow-md: 0 4px 8px oklch(0.2 0.025 240 / 0.08), 0 8px 24px oklch(0.2 0.025 240 / 0.1);
+--shadow-lg: 0 8px 16px oklch(0.2 0.025 240 / 0.1), 0 16px 40px oklch(0.2 0.025 240 / 0.12);
+```
 
-- **Primary** (`.btn-p`): `background: #2563EB`, `color: white`, `padding: 12px 24px`
-- **Secondary** (`.btn-s`): `background: rgba(255,255,255,.1)`, `border: 1px solid rgba(255,255,255,.2)`, `color: white`, same padding — used on dark backgrounds only
+## Components
 
-App pages use `.btn`, `.btn-primary`, `.btn-outline` etc. from `main.css`.
+### Buttons
 
-## Component Inventory
+```
+Primary: bg-emerald, text-white, py-2.5 px-5, rounded-md, font-semibold
+         hover: bg-emerald-hover, shadow-sm
+         focus: ring-2 ring-emerald/40
+Outline: border border-border-strong, text-text-primary, same sizing
+Ghost:   no border, text-text-secondary, hover:bg-surface
+Danger:  bg-red, text-white
+```
 
-### Section Chips
-All section labels use `.chip`: `background: #EFF6FF`, `color: #2563EB`, `padding: 5px 13px`, `border-radius: 9999px`, `font-size: 12px`, `font-weight: 700`. Always include an SVG icon + text label.
+### Status Badges
 
-### Feature Cards (`.card-f`)
-`background: white`, `border: 1px solid #E2E8F0`, `border-radius: 16px`, `padding: 28px`. Hover: `translateY(-4px)` + shadow + blue border.
+```
+Paid/Active:   bg-emerald-light, text-emerald, rounded-full, text-xs font-semibold
+Pending:       bg-amber-light, text-amber
+Overdue/Error: bg-red-light, text-red
+Inactive/Void: bg-surface, text-text-tertiary
+```
 
-### Pricing Cards (`.card-p`)
-`border-radius: 20px`, `padding: 32px`. Featured card (Pro): `background: #0B1D2E`, no border, white text. Scale featured: `transform: scale(1.04)`.
+### Cards
 
-### Testimonial Cards (`.card-t`)
-`background: white`, `border: 1px solid #E2E8F0`, `border-radius: 16px`, `padding: 28px`.
+```
+Base:     bg-surface-raised, border border-border, rounded-lg, shadow-sm
+Hover:    shadow-md, border-border-strong
+Featured: border-emerald/30, shadow emerald-tinted
+Stat:     p-6, with large number in Geist Mono
+```
 
-### Stats Cards (`.stat-c`)
-`background: rgba(255,255,255,.08)`, `border: 1px solid rgba(255,255,255,.12)`, `backdrop-filter: blur(8px)`, `border-radius: 16px`, `padding: 28px`. Used on dark `#0B1D2E` bg only.
+### Data Tables
 
-### Badges
-`.bd` base + modifier: `.bd-g` (green), `.bd-b` (blue), `.bd-a` (amber), `.bd-r` (red), `.bd-s` (slate). All pill-shaped (`border-radius: 9999px`), `font-size: 12px`, `font-weight: 600`.
+```
+Header:  bg-surface, text-label, font-semibold text-text-secondary, uppercase tracking-wide
+Row:     border-b border-border, hover:bg-surface
+Actions: appear on row hover, text-text-secondary
+```
 
-## Animations
+## App Layout
 
-- **Page entry** (hero): `.afiu` + `.d1`–`.d4` delay classes. `fadeInUp` 0.6s ease.
-- **Scroll reveal**: `.reveal` + JS adds `.vis`. `opacity: 0 → 1`, `translateY(16px → 0)`, 0.55s ease.
-- No bounce, no elastic easing anywhere.
+```
+Sidebar: 256px, bg-slate-hero, fixed left
+         Logo top, nav items middle, user/settings bottom
+         Active item: bg-emerald/15, text-emerald, left border 2px emerald
+Topbar:  60px, bg-surface-raised, border-b, breadcrumb + actions
+Content: flex-1 ml-64, bg-bg, min-h-screen, p-6
+```
 
-## Section Backgrounds (Landing Page)
+## Landing Page Structure
 
-Alternating rhythm for visual separation:
-1. Hero: dark gradient `#050F19 → #0B1D2E → #112840`
-2. Features: `white`
-3. Stats: `#0B1D2E` (dark break)
-4. How it Works: `#F8FAFC`
-5. Pricing: `white`
-6. Testimonials: `#F8FAFC`
-7. FAQ: `white`
-8. CTA: gradient `#0B1D2E → #1A3552`
-9. Footer: `#050F19`
+```
+1. Nav:        bg-transparent → bg-surface-raised/90 blur on scroll
+2. Hero:       bg-slate-hero, Committed emerald accents
+3. Stats bar:  bg-emerald/8, key numbers
+4. Features:   bg-bg alternating
+5. How it works: bg-surface
+6. QR demo:    bg-slate-dark, feature highlight
+7. Pricing:    bg-bg
+8. CTA:        bg-emerald (full drench moment)
+9. Footer:     bg-slate-hero
+```
 
-## App Layout (Dashboard + inner pages)
+## Motion
 
-Sidebar: `260px` wide, `#0B1D2E` bg, fixed. Topbar: `64px`, white. Content: `padding: 28px 24px`.
-Uses `main.css` exclusively — no landing-page CSS on app pages.
+- Page transitions: opacity + translateY(8px), 200ms ease-out-quart
+- Hover: scale(1.01) on cards, 150ms ease-out
+- Sidebar nav: bg transition 120ms
+- Skeleton: shimmer from oklch(0.9 0.01 155) → oklch(0.95 0.01 155)
+- Respect prefers-reduced-motion — disable transforms, keep opacity
+- No bounce, no elastic, no spring on UI elements

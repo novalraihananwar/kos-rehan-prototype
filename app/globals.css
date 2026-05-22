@@ -1,0 +1,198 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* SmartApt Design Tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-emerald: var(--emerald);
+  --color-emerald-light: var(--emerald-light);
+  --color-emerald-hover: var(--emerald-hover);
+  --color-slate-hero: var(--slate-hero);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  /* Chart colors using emerald palette */
+  --color-chart-1: var(--emerald);
+  --color-chart-2: oklch(0.72 0.16 75);
+  --color-chart-3: oklch(0.62 0.19 25);
+  --color-chart-4: oklch(0.6 0.12 220);
+  --color-chart-5: oklch(0.78 0.1 162);
+}
+
+:root {
+  /* SmartApt: Off-white + Slate + Emerald */
+  --background: oklch(0.985 0.006 155);
+  --foreground: oklch(0.2 0.025 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.025 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.025 240);
+
+  /* Primary = Emerald */
+  --primary: oklch(0.54 0.155 162);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.97 0.008 155);
+  --secondary-foreground: oklch(0.2 0.025 240);
+  --muted: oklch(0.975 0.008 155);
+  --muted-foreground: oklch(0.48 0.022 240);
+  --accent: oklch(0.97 0.04 162);
+  --accent-foreground: oklch(0.54 0.155 162);
+  --destructive: oklch(0.62 0.19 25);
+  --border: oklch(0.9 0.012 155);
+  --input: oklch(0.9 0.012 155);
+  --ring: oklch(0.54 0.155 162);
+  --radius: 0.625rem;
+
+  /* SmartApt custom tokens */
+  --emerald: oklch(0.54 0.155 162);
+  --emerald-hover: oklch(0.48 0.145 162);
+  --emerald-light: oklch(0.97 0.04 162);
+  --slate-hero: oklch(0.15 0.028 240);
+  --slate-dark: oklch(0.22 0.032 240);
+
+  /* Chart colors */
+  --chart-1: oklch(0.54 0.155 162);
+  --chart-2: oklch(0.72 0.16 75);
+  --chart-3: oklch(0.62 0.19 25);
+  --chart-4: oklch(0.6 0.12 220);
+  --chart-5: oklch(0.78 0.1 162);
+
+  /* Sidebar — dark slate */
+  --sidebar: oklch(0.15 0.028 240);
+  --sidebar-foreground: oklch(0.88 0.015 155);
+  --sidebar-primary: oklch(0.54 0.155 162);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.54 0.155 162 / 0.12);
+  --sidebar-accent-foreground: oklch(0.88 0.015 155);
+  --sidebar-border: oklch(1 0 0 / 0.08);
+  --sidebar-ring: oklch(0.54 0.155 162);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply h-full antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-full;
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+
+  /* Tabular numbers for data */
+  .tabular-nums,
+  [data-stat],
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono), monospace;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display), system-ui, sans-serif; }
+  .font-body { font-family: var(--font-body), system-ui, sans-serif; }
+
+  /* Smooth scrolling */
+  .scroll-smooth { scroll-behavior: smooth; }
+
+  /* Focus ring — emerald */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  /* Status badge utilities */
+  .badge-paid {
+    @apply bg-[oklch(0.97_0.04_162)] text-[oklch(0.48_0.145_162)] text-xs font-semibold px-2.5 py-0.5 rounded-full;
+  }
+  .badge-pending {
+    @apply bg-[oklch(0.98_0.03_85)] text-[oklch(0.6_0.16_75)] text-xs font-semibold px-2.5 py-0.5 rounded-full;
+  }
+  .badge-overdue {
+    @apply bg-[oklch(0.97_0.03_25)] text-[oklch(0.52_0.19_25)] text-xs font-semibold px-2.5 py-0.5 rounded-full;
+  }
+  .badge-vacant {
+    @apply bg-secondary text-muted-foreground text-xs font-semibold px-2.5 py-0.5 rounded-full;
+  }
+}
+
+/* Animations — ease-out-quart, no bounce */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    oklch(0.93 0.008 155) 25%,
+    oklch(0.96 0.006 155) 50%,
+    oklch(0.93 0.008 155) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .skeleton { animation: none; }
+}
