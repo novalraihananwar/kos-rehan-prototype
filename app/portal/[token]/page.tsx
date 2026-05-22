@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic"
 
-import { CheckCircle, AlertCircle, Phone, MessageCircle, ChevronDown, Building2, Calendar, CreditCard, Wrench, Wifi, Shield, QrCode } from "lucide-react"
+import { CheckCircle, AlertCircle, Phone, MessageCircle, Building2, Calendar, CreditCard, Wrench, Wifi, Shield, QrCode } from "lucide-react"
 
 interface Props {
   params: Promise<{ token: string }>
@@ -60,7 +60,7 @@ export default async function TenantPortal({ params }: Props) {
           <div className="w-7 h-7 rounded-md bg-[var(--emerald)] flex items-center justify-center">
             <Building2 className="w-4 h-4 text-white" />
           </div>
-          <span className="font-display font-700 text-white text-base">SmartApt</span>
+          <span className="font-display font-bold text-white text-base">SmartApt</span>
         </div>
         <span className="text-xs text-slate-400 font-mono">Portal Penghuni</span>
       </header>

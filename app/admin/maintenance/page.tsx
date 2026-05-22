@@ -143,13 +143,6 @@ const WORK_ORDERS: WorkOrder[] = [
 ]
 
 // --- Helpers ---
-const priorityConfig: Record<Priority, { label: string; className: string }> = {
-  Urgent: "bg-red-50 text-red-700",
-  Tinggi: "bg-amber-50 text-amber-700",
-  Normal: "bg-[oklch(0.97_0.04_162)] text-[oklch(0.48_0.145_162)]",
-  Rendah: "bg-secondary text-muted-foreground",
-} as unknown as Record<Priority, { label: string; className: string }>
-
 const priorityClass: Record<Priority, string> = {
   Urgent: "bg-red-50 text-red-700",
   Tinggi: "bg-amber-50 text-amber-700",

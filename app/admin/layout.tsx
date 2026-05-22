@@ -56,23 +56,23 @@ const navSections: NavSection[] = [
   {
     title: 'Properti',
     items: [
-      { href: '/admin/unit', label: 'Unit', icon: Building2 },
-      { href: '/admin/penghuni', label: 'Penghuni', icon: Users },
+      { href: '/admin/units', label: 'Unit', icon: Building2 },
+      { href: '/admin/tenants', label: 'Penghuni', icon: Users },
     ],
   },
   {
     title: 'Keuangan',
     items: [
-      { href: '/admin/pembayaran', label: 'Pembayaran', icon: CreditCard },
-      { href: '/admin/laporan', label: 'Laporan', icon: ChartBarIncreasing },
+      { href: '/admin/payments', label: 'Pembayaran', icon: CreditCard },
+      { href: '/admin/reports', label: 'Laporan', icon: ChartBarIncreasing },
     ],
   },
   {
     title: 'Operasional',
     items: [
       { href: '/admin/maintenance', label: 'Maintenance', icon: Wrench },
-      { href: '/admin/amenitas', label: 'Amenitas', icon: Dumbbell },
-      { href: '/admin/pengunjung', label: 'Pengunjung', icon: UserCheck },
+      { href: '/admin/amenities', label: 'Amenitas', icon: Dumbbell },
+      { href: '/admin/visitors', label: 'Pengunjung', icon: UserCheck },
     ],
   },
   {
@@ -84,7 +84,7 @@ const navSections: NavSection[] = [
   {
     title: 'Alat',
     items: [
-      { href: '/admin/qr', label: 'Kartu QR', icon: QrCode },
+      { href: '/admin/qr-cards', label: 'Kartu QR', icon: QrCode },
     ],
   },
 ]
@@ -92,15 +92,15 @@ const navSections: NavSection[] = [
 // Friendly name map for breadcrumbs
 const routeLabels: Record<string, string> = {
   '/admin': 'Dashboard',
-  '/admin/unit': 'Unit',
-  '/admin/penghuni': 'Penghuni',
-  '/admin/pembayaran': 'Pembayaran',
-  '/admin/laporan': 'Laporan',
+  '/admin/units': 'Unit',
+  '/admin/tenants': 'Penghuni',
+  '/admin/payments': 'Pembayaran',
+  '/admin/reports': 'Laporan',
   '/admin/maintenance': 'Maintenance',
-  '/admin/amenitas': 'Amenitas',
-  '/admin/pengunjung': 'Pengunjung',
+  '/admin/amenities': 'Amenitas',
+  '/admin/visitors': 'Pengunjung',
   '/admin/whatsapp': 'WhatsApp',
-  '/admin/qr': 'Kartu QR',
+  '/admin/qr-cards': 'Kartu QR',
 }
 
 // ── Sidebar ────────────────────────────────────────────────────────────────

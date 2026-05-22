@@ -58,15 +58,15 @@ export function NavbarScroll() {
 
         {/* CTA group */}
         <div className="flex items-center gap-3">
-          <a
-            href="#masuk"
+          <Link
+            href="/login"
             className={[
               "hidden sm:inline-block text-sm font-medium transition-colors hover:text-[oklch(0.54_0.155_162)]",
               scrolled ? "text-[oklch(0.35_0.025_240)]" : "text-white/80",
             ].join(" ")}
           >
             Masuk
-          </a>
+          </Link>
           <a
             href="#daftar"
             className="inline-flex h-9 items-center justify-center rounded-lg bg-[oklch(0.54_0.155_162)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[oklch(0.48_0.145_162)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.54_0.155_162)] focus-visible:ring-offset-2"

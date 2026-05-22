@@ -194,14 +194,29 @@ function AddAmenityDialog() {
 }
 
 // --- Page ---
+const DATE_FORMATTER = new Intl.DateTimeFormat("id-ID", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+})
+
 export default function AmenitiesPage() {
   const [amenities, setAmenities] = useState<Amenity[]>(AMENITIES)
-  const [selectedDate, setSelectedDate] = useState("22 Mei 2026")
+  // Anchor on 22 May 2026 to match the rest of the mock data.
+  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date(2026, 4, 22))
 
   const handleToggle = (id: string, val: boolean) => {
     setAmenities((prev) =>
       prev.map((a) => (a.id === id ? { ...a, active: val } : a))
     )
+  }
+
+  const shiftDay = (delta: number) => {
+    setSelectedDate((prev) => {
+      const next = new Date(prev)
+      next.setDate(prev.getDate() + delta)
+      return next
+    })
   }
 
   return (
@@ -232,11 +247,23 @@ export default function AmenitiesPage() {
             <h2 className="font-display text-base font-bold">Jadwal Booking</h2>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="icon-sm">
+            <Button
+              variant="outline"
+              size="icon-sm"
+              onClick={() => shiftDay(-1)}
+              aria-label="Hari sebelumnya"
+            >
               <ChevronLeft className="size-3.5" />
             </Button>
-            <span className="text-sm font-medium px-2">{selectedDate}</span>
-            <Button variant="outline" size="icon-sm">
+            <span className="text-sm font-medium px-2">
+              {DATE_FORMATTER.format(selectedDate)}
+            </span>
+            <Button
+              variant="outline"
+              size="icon-sm"
+              onClick={() => shiftDay(1)}
+              aria-label="Hari berikutnya"
+            >
               <ChevronRight className="size-3.5" />
             </Button>
           </div>

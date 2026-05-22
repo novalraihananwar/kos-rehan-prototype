@@ -1,6 +1,6 @@
 'use client'
 
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
 const unitData = [
   { name: 'Terisi', value: 189, color: 'oklch(0.54 0.155 162)' },
